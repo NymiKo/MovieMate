@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MovieMate"
 include ':app'
+include ':data'
