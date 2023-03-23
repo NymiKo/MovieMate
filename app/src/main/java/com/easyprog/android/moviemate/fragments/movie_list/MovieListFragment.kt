@@ -1,25 +1,17 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.databinding.FragmentMovieListBinding
+import com.easyprog.android.moviemate.fragments.base.BaseFragment
 
-class MovieListFragment : Fragment() {
+class MovieListFragment :
+    BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie_list, container, false)
-    }
+
 }

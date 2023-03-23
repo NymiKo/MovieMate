@@ -2,6 +2,8 @@ package com.easyprog.android.moviemate.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
+import androidx.navigation.findNavController
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.databinding.ActivityMainBinding
 
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        _binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
     }
 }
