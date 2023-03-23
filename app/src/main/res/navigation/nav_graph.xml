@@ -10,4 +10,8 @@
         android:name="com.easyprog.android.moviemate.fragments.movie_list.MovieListFragment"
         android:label="fragment_movie_list"
         tools:layout="@layout/fragment_movie_list" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.easyprog.android.moviemate.fragments.search.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>
