@@ -1,8 +1,10 @@
 package com.easyprog.android.moviemate.domain.implementation
 
 import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.domain.FakeFirebaseSource
 import com.easyprog.android.moviemate.domain.MovieRepository
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -18,7 +20,7 @@ class MovieRepositoryImplTest {
     }
 
     @Test
-    fun `checking the result for success`() {
+    fun `checking the result for success`() = runBlocking {
         val expectedMovieList = listOf(
             Movie(0, "Милый дом"),
             Movie(1, "Завтра"),
@@ -26,8 +28,7 @@ class MovieRepositoryImplTest {
             Movie(3, "Во имя мести")
         )
         firestore.setMovieList(expectedMovieList)
-        val actualList = repository.getMovieList()
+        val actualList: Result.SUCCESS<List<Movie>> = repository.getMovieList() as Result.SUCCESS<List<Movie>>
         assertEquals(expectedMovieList, actualList.data)
     }
-
 }

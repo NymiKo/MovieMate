@@ -9,7 +9,7 @@ class FakeFirebaseSource: FirebaseSource {
     private val movieList: MutableList<Movie> = mutableListOf()
     private var error: Boolean = false
 
-    fun setMovieList(newMovieList: List<Movie>, error: Boolean = false) {
+    fun setMovieList(newMovieList: List<Movie> = emptyList(), error: Boolean = false) {
         this.error = error
         movieList.addAll(newMovieList)
     }
