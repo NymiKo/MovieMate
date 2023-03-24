@@ -31,4 +31,11 @@ class MovieRepositoryImplTest {
         val actualList: Result.SUCCESS<List<Movie>> = repository.getMovieList() as Result.SUCCESS<List<Movie>>
         assertEquals(expectedMovieList, actualList.data)
     }
+
+    @Test
+    fun `checking the result for error`() = runBlocking {
+        firestore.setMovieList(error = true)
+        val actualResult = repository.getMovieList()
+        assertTrue(actualResult is Result.ERROR)
+    }
 }
