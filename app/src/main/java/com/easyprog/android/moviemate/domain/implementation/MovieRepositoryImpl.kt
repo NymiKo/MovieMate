@@ -6,7 +6,6 @@ import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.domain.MovieRepository
 
 class MovieRepositoryImpl(private val firebaseSource: FirebaseSource): MovieRepository {
-    override suspend fun getMovieList(): Result<List<Movie>> {
-        return firebaseSource.getMovieList()
-    }
+
+    override suspend fun getMovieList(): Result<List<Movie>> = firebaseSource.getMovieList()
 }
