@@ -14,10 +14,14 @@ class FirebaseSourceImpl: FirebaseSource {
 
     override suspend fun getMovieList(): Result<List<Movie>> {
         val snapshot = firestore.collection(COLLECTION_MOVIES).orderBy(ID).get().await()
-        return if (!snapshot.isEmpty) {
-            Result.SUCCESS(snapshot.toObjects(Movie::class.java))
-        } else {
-            Result.ERROR(Exception("No data"))
+        return try {
+            if (!snapshot.isEmpty) {
+                Result.SUCCESS(snapshot.toObjects(Movie::class.java))
+            } else {
+                Result.ERROR(Exception("No data"))
+            }
+        } catch (e: Exception) {
+            Result.ERROR(Exception(e))
         }
     }
 }

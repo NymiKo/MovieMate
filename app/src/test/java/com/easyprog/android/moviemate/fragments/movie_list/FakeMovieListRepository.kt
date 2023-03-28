@@ -8,17 +8,22 @@ class FakeMovieListRepository : MovieRepository {
 
     private var movieList = emptyList<Movie>()
     private var error = false
+    private var massageError: Exception = Exception("")
 
-    fun setMovieList(newMovieList: List<Movie> = emptyList(), error: Boolean = false) {
+    fun setMovieList(newMovieList: List<Movie> = emptyList()) {
         movieList = newMovieList
-        this.error = error
+    }
+
+    fun setMovieListError(massageError: Exception) {
+        this.massageError = massageError
+        error = true
     }
 
     override suspend fun getMovieList(): Result<List<Movie>> {
         return if (!error) {
             Result.SUCCESS(movieList)
         } else {
-            Result.ERROR(Exception("No LIst"))
+            Result.ERROR(massageError)
         }
     }
 }

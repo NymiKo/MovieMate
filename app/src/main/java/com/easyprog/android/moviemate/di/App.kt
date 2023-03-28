@@ -10,7 +10,7 @@ import com.google.firebase.ktx.Firebase
 
 class App: Application() {
 
-    private lateinit var repository: MovieRepository
+    lateinit var repository: MovieRepository
 
     override fun onCreate() {
         super.onCreate()

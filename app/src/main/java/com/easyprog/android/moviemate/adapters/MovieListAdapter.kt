@@ -27,7 +27,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
         val movie = movieList[position]
         holder.binding.apply {
             textMovieName.text = movie.name
-            imageMovieAvatar.loadImage(movie.avatar)
+            imageMovieAvatar.loadImage(movie.image)
         }
     }
 
