@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/margin_small"
         android:layout_weight="1"
-        app:cardCornerRadius="3dp">
+        app:cardCornerRadius="5dp">
 
         <ImageView
             android:id="@+id/image_movie_avatar"

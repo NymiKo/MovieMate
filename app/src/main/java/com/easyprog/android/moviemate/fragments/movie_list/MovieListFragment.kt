@@ -41,6 +41,7 @@ class MovieListFragment :
                 }
                 is Result.SUCCESS -> {
                     setupRecyclerView(result.data)
+                    binding.frameLayoutProgress.visibility = View.GONE
                 }
             }
         }
