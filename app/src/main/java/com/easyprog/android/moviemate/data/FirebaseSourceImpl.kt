@@ -24,4 +24,8 @@ class FirebaseSourceImpl: FirebaseSource {
             Result.ERROR(Exception(e))
         }
     }
+
+    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
+        return Result.SUCCESS(emptyList())
+    }
 }

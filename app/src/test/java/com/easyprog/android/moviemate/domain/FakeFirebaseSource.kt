@@ -24,7 +24,8 @@ class FakeFirebaseSource: FirebaseSource {
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
         return if (!error) {
-            Result.SUCCESS(movieList.filter { it.name == searchQuery })
+            val filterList = movieList.filter { movie -> movie.name.contains(searchQuery) }
+            Result.SUCCESS(filterList)
         } else {
             Result.ERROR(Exception("No data"))
         }
