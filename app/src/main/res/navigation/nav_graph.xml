@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieFilterFragment"
-        android:name="com.easyprog.android.moviemate.fragments.filter.MovieFilterFragment"
+        android:name="com.easyprog.android.moviemate.fragments.movie_filter.MovieFilterFragment"
         android:label="fragment_movie_filter"
         tools:layout="@layout/fragment_movie_filter" />
 </navigation>

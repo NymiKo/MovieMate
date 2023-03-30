@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/padding_small">
+    android:paddingHorizontal="@dimen/padding_small">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_layout_search"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxStrokeColor="@color/white"
+        app:boxStrokeColor="?attr/colorOnPrimary"
         app:boxStrokeWidth="0dp"
         app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_filter"
-        app:endIconTint="@color/black"
-        app:startIconTint="@color/black"
+        app:endIconTint="?attr/colorSecondaryVariant"
+        app:startIconTint="?attr/colorSecondaryVariant"
         app:startIconDrawable="@drawable/ic_search">
 
         <com.google.android.material.textfield.TextInputEditText

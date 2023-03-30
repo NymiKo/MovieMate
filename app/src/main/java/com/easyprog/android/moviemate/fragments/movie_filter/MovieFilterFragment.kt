@@ -1,10 +1,5 @@
-package com.easyprog.android.moviemate.fragments.filter
+package com.easyprog.android.moviemate.fragments.movie_filter
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.databinding.FragmentMovieFilterBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 

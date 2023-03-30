@@ -29,9 +29,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.textLayoutSearch.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 setupStartIconSearchEditText(R.drawable.ic_back)
+                setupEndIconSearchEditText(R.drawable.ic_clear)
                 clickOnStartIconSearchEditText()
+                clickEndIconClearSearchEditText()
             } else {
                 setupStartIconSearchEditText(R.drawable.ic_search)
+                setupEndIconSearchEditText(R.drawable.ic_filter)
+                clickEndIconSearchEditText()
             }
         }
     }
@@ -41,18 +45,27 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             AppCompatResources.getDrawable(requireContext(), icon)
     }
 
+    private fun clickOnStartIconSearchEditText() {
+        binding.textLayoutSearch.setStartIconOnClickListener {
+            binding.textLayoutSearch.editText?.clearFocus()
+            hideKeyboard()
+        }
+    }
+
+    private fun setupEndIconSearchEditText(icon: Int) {
+        binding.textLayoutSearch.endIconDrawable =
+            AppCompatResources.getDrawable(requireContext(), icon)
+    }
+
     private fun clickEndIconSearchEditText() {
         binding.textLayoutSearch.setEndIconOnClickListener {
             navigateTo(R.id.action_searchFragment_to_movieFilterFragment)
         }
     }
 
-    private fun clickOnStartIconSearchEditText() {
-        binding.textLayoutSearch.setStartIconOnClickListener {
-            binding.textLayoutSearch.editText?.clearFocus()
-            view.apply {
-                hideKeyboard()
-            }
+    private fun clickEndIconClearSearchEditText() {
+        binding.textLayoutSearch.setEndIconOnClickListener {
+            binding.textLayoutSearch.editText?.text?.clear()
         }
     }
 
