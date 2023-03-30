@@ -8,6 +8,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.easyprog.android.moviemate.activity.MainActivity
 import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.showToast(@StringRes message: Int) {
@@ -29,4 +30,12 @@ fun Fragment.hideKeyboard() {
 
 fun Fragment.navigateTo(fragment: Int) {
     findNavController().navigate(fragment)
+}
+
+fun Fragment.hideBottomNavView() {
+    (requireActivity() as MainActivity).hideBottomNavView()
+}
+
+fun Fragment.showBottomNavView() {
+    (requireActivity() as MainActivity).showBottomNavView()
 }

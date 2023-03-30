@@ -6,13 +6,16 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
+import com.easyprog.android.moviemate.utils.hideBottomNavView
 import com.easyprog.android.moviemate.utils.hideKeyboard
 import com.easyprog.android.moviemate.utils.navigateTo
+import com.easyprog.android.moviemate.utils.showBottomNavView
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showBottomNavView()
         setupView()
     }
 

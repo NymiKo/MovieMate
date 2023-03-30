@@ -2,6 +2,7 @@ package com.easyprog.android.moviemate.activity
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -19,5 +20,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         val navController = findNavController(R.id.nav_host_fragment_container)
         binding.bottomNavView.setupWithNavController(navController)
+    }
+
+    fun hideBottomNavView() {
+        binding.bottomNavView.visibility = View.GONE
+    }
+
+    fun showBottomNavView() {
+        binding.bottomNavView.visibility = View.VISIBLE
     }
 }
