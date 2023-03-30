@@ -11,6 +11,7 @@ import android.widget.SearchView.OnQueryTextListener
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.activity.MainActivity

@@ -37,11 +37,11 @@ class MovieListFragment :
 
                 }
                 is Result.ERROR -> {
-
+                    hideProgressBar()
                 }
                 is Result.SUCCESS -> {
                     setupRecyclerView(result.data)
-                    binding.frameLayoutProgress.visibility = View.GONE
+                    hideProgressBar()
                 }
             }
         }
@@ -57,4 +57,7 @@ class MovieListFragment :
         }
     }
 
+    private fun hideProgressBar() {
+        binding.recyclerViewMovieList.visibility = View.GONE
+    }
 }
