@@ -9,9 +9,22 @@
         android:id="@+id/movieListFragment"
         android:name="com.easyprog.android.moviemate.fragments.movie_list.MovieListFragment"
         android:label="fragment_movie_list"
-        tools:layout="@layout/fragment_movie_list" />
+        tools:layout="@layout/fragment_movie_list" >
+        <action
+            android:id="@+id/action_movieListFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.easyprog.android.moviemate.fragments.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_movieFilterFragment"
+            app:destination="@id/movieFilterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFilterFragment"
+        android:name="com.easyprog.android.moviemate.fragments.filter.MovieFilterFragment"
+        android:label="fragment_movie_filter"
+        tools:layout="@layout/fragment_movie_filter" />
 </navigation>
