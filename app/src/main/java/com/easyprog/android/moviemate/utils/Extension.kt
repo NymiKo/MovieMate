@@ -2,14 +2,20 @@ package com.easyprog.android.moviemate.utils
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.easyprog.android.moviemate.activity.MainActivity
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.onStart
 
 fun Fragment.showToast(@StringRes message: Int) {
     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
@@ -38,4 +44,11 @@ fun Fragment.hideBottomNavView() {
 
 fun Fragment.showBottomNavView() {
     (requireActivity() as MainActivity).showBottomNavView()
+}
+
+fun EditText.textChangedListener(): Flow<CharSequence?> {
+    return callbackFlow {
+        val listener = doOnTextChanged { text, _, _, _ -> trySend(text) }
+        awaitClose { removeTextChangedListener(listener) }
+    }.onStart { emit(text) }
 }

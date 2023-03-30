@@ -21,4 +21,12 @@ class FakeFirebaseSource: FirebaseSource {
             Result.ERROR(Exception("No data"))
         }
     }
+
+    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
+        return if (!error) {
+            Result.SUCCESS(movieList.filter { it.name == searchQuery })
+        } else {
+            Result.ERROR(Exception("No data"))
+        }
+    }
 }

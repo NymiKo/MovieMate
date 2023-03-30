@@ -1,15 +1,17 @@
 package com.easyprog.android.moviemate.fragments.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.lifecycleScope
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.utils.hideBottomNavView
-import com.easyprog.android.moviemate.utils.hideKeyboard
-import com.easyprog.android.moviemate.utils.navigateTo
-import com.easyprog.android.moviemate.utils.showBottomNavView
+import com.easyprog.android.moviemate.utils.*
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
@@ -17,6 +19,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         super.onViewCreated(view, savedInstanceState)
         showBottomNavView()
         setupView()
+        searchListener()
     }
 
     private fun setupView() {
@@ -72,4 +75,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
     }
 
+    private fun searchListener() {
+        binding.textLayoutSearch.editText?.textChangedListener()?.debounce(1000)
+            ?.onEach { Log.e("TEXT_CHANGED", it.toString()) }
+            ?.launchIn(lifecycleScope)
+    }
 }
