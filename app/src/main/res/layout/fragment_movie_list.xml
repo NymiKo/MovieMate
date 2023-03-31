@@ -8,7 +8,7 @@
     tools:context=".fragments.movie_list.MovieListFragment">
 
     <FrameLayout
-        android:id="@+id/frameLayoutProgress"
+        android:id="@+id/frame_layout_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
