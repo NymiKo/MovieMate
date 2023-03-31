@@ -29,7 +29,7 @@ class MovieListViewModelTest {
     @Before
     fun setup() {
         repository = FakeMovieListRepository()
-        viewModel = MovieListViewModel(repository)
+        viewModel = MovieListViewModel(repository, coroutineTestRule.testDispatcher)
     }
 
     @Test

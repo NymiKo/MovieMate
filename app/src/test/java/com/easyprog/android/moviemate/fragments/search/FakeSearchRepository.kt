@@ -4,9 +4,9 @@ import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.domain.SearchRepository
 
-class FakeSearchRepository: SearchRepository {
+class FakeSearchRepository : SearchRepository {
 
-    private var searchMovieList = emptyList<Movie>()
+    private var searchMovieList: List<Movie> = emptyList()
     private var error = false
     private var messageError: Exception = Exception()
 
@@ -21,7 +21,10 @@ class FakeSearchRepository: SearchRepository {
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
         return if (!error) {
-            val filterList = searchMovieList.filter { movie -> movie.name.contains(searchQuery) }
+            val filterList = if (searchMovieList.isNotEmpty()) searchMovieList.filter { movie ->
+                movie.name.contains(searchQuery)
+            } else searchMovieList
+
             Result.SUCCESS(filterList)
         } else {
             Result.ERROR(messageError)
