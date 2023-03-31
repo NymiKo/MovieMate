@@ -26,7 +26,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
-            textMovieName.text = movie.name
+            textMovieName.text = movie.name.replaceFirstChar { it.uppercase() }
             imageMovieAvatar.loadImage(movie.image)
         }
     }

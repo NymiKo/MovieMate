@@ -1,6 +1,7 @@
 package com.easyprog.android.moviemate.di
 
 import android.app.Application
+import com.easyprog.android.moviemate.data.FirebaseSource
 import com.easyprog.android.moviemate.data.FirebaseSourceImpl
 import com.easyprog.android.moviemate.domain.MovieRepository
 import com.easyprog.android.moviemate.domain.SearchRepository
@@ -14,12 +15,13 @@ class App: Application() {
 
     lateinit var movieRepository: MovieRepository
     lateinit var searchRepository: SearchRepository
-    private val firebase = FirebaseSourceImpl()
+    private lateinit var firebase: FirebaseSource
 
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
         FirebaseApp.initializeApp(applicationContext)
+        firebase = FirebaseSourceImpl()
         movieRepository = MovieRepositoryImpl(firebase)
         searchRepository = SearchRepositoryImpl(firebase)
     }

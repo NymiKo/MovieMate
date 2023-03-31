@@ -19,7 +19,7 @@ class FirebaseSourceImpl: FirebaseSource {
     }
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
-        val snapshot = firestore.collection(COLLECTION_MOVIES).whereEqualTo("name", searchQuery).get().await()
+        val snapshot = firestore.collection(COLLECTION_MOVIES).whereEqualTo("name", searchQuery.lowercase()).get().await()
         return getResult(snapshot)
     }
 
