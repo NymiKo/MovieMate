@@ -12,7 +12,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class SearchViewModelTest {
 
     @get:Rule
@@ -39,7 +38,6 @@ class SearchViewModelTest {
         )
         repository.setSearchMovieList(movieList)
         viewModel.getMovieListBySearch("лы")
-        advanceUntilIdle()
         val actualList = viewModel.searchMovieList.value
         val expectedList = Result.SUCCESS(listOf(Movie(0, "Милый дом")))
         Assert.assertEquals(expectedList, actualList)
@@ -50,7 +48,6 @@ class SearchViewModelTest {
         val exception = Exception("Error")
         repository.setError(exception)
         viewModel.getMovieListBySearch("лы")
-        advanceUntilIdle()
         val actualException = viewModel.searchMovieList.value
         val expectedException = Result.ERROR(exception)
         Assert.assertEquals(expectedException, actualException)
@@ -59,7 +56,6 @@ class SearchViewModelTest {
     @Test
     fun `get an empty list on request`() = runTest {
         viewModel.getMovieListBySearch("лы")
-        advanceUntilIdle()
         val actualList = viewModel.searchMovieList.value
         val expectedList = Result.SUCCESS(emptyList<Movie>())
         Assert.assertEquals(expectedList, actualList)

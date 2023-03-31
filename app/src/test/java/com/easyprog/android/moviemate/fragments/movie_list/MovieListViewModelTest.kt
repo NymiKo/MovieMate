@@ -14,7 +14,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class MovieListViewModelTest {
 
     @get:Rule
@@ -47,7 +46,6 @@ class MovieListViewModelTest {
         )
         repository.setMovieList(expectedMovieList)
         viewModel.getMovieList()
-        advanceUntilIdle()
         assertEquals(Result.SUCCESS(expectedMovieList), viewModel.movieList.value)
     }
 
@@ -56,7 +54,6 @@ class MovieListViewModelTest {
         val massageError = Exception("No data")
         repository.setMovieListError(massageError)
         viewModel.getMovieList()
-        advanceUntilIdle()
         assertEquals(Result.ERROR(massageError), viewModel.movieList.value)
     }
 
