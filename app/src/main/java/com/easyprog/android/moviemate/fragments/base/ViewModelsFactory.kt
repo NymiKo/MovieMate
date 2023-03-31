@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.easyprog.android.moviemate.di.App
 import com.easyprog.android.moviemate.fragments.movie_list.MovieListViewModel
+import com.easyprog.android.moviemate.fragments.search.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 
 class ViewModelsFactory(
@@ -14,10 +15,13 @@ class ViewModelsFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val viewModel = when(modelClass) {
             MovieListViewModel::class.java -> {
-                MovieListViewModel(app.repository, Dispatchers.IO)
+                MovieListViewModel(app.movieRepository, Dispatchers.IO)
+            }
+            SearchViewModel::class.java -> {
+                SearchViewModel(app.searchRepository, Dispatchers.IO)
             }
             else -> {
-                MovieListViewModel(app.repository, Dispatchers.IO)
+                MovieListViewModel(app.movieRepository, Dispatchers.IO)
             }
         }
         return viewModel as T
