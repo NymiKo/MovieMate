@@ -6,7 +6,11 @@ import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
+import com.easyprog.android.moviemate.data.Result
+import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.fragments.base.factory
@@ -18,16 +22,19 @@ import kotlinx.coroutines.flow.onEach
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     private val viewModel: SearchViewModel by viewModels { factory() }
+    private lateinit var mAdapter: SearchMovieAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showBottomNavView()
+        getSearchResult()
         setupView()
-        searchListener()
     }
 
     private fun setupView() {
+        showBottomNavView()
         setupSearchEditText()
+        searchListener()
+        setupRecyclerView()
     }
 
     private fun setupSearchEditText() {
@@ -69,9 +76,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun clickEndIconSearchEditText() {
         binding.textLayoutSearch.setEndIconOnClickListener {
-            viewModel.searchMovieList.observe(viewLifecycleOwner) {
-                Log.e("MOVIE_LIST", it.toString())
-            }
             navigateTo(R.id.action_searchFragment_to_movieFilterFragment)
         }
     }
@@ -87,4 +91,46 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             ?.onEach { viewModel.getMovieListBySearch(it.toString()) }
             ?.launchIn(lifecycleScope)
     }
+
+    private fun setupRecyclerView() {
+        mAdapter = SearchMovieAdapter()
+        binding.recyclerViewFoundMovies.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewFoundMovies.adapter = mAdapter
+    }
+
+    private fun setResultToRecyclerView(movieList: List<Movie>) {
+        mAdapter = SearchMovieAdapter().apply {
+            this.movieList = movieList
+        }
+        binding.recyclerViewFoundMovies.adapter = mAdapter
+    }
+
+    private fun getSearchResult() {
+        viewModel.searchMovieList.observe(viewLifecycleOwner) { result ->
+            when(result) {
+                is Result.ERROR -> {
+                    hideProgressBar()
+                    showSnackBar(R.string.error_message)
+                    setResultToRecyclerView(emptyList())
+                }
+                Result.LOADING -> {
+                    showProgressBar()
+                }
+                is Result.SUCCESS -> {
+                    setResultToRecyclerView(result.data)
+                    Log.e("DATA", result.data.toString())
+                    hideProgressBar()
+                }
+            }
+        }
+    }
+
+    private fun hideProgressBar() {
+        binding.frameLayoutProgress.visibility = View.GONE
+    }
+
+    private fun showProgressBar() {
+        binding.frameLayoutProgress.visibility = View.GONE
+    }
+
 }
