@@ -89,7 +89,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun searchListener() {
-        binding.textLayoutSearch.editText?.textChangedListener()?.debounce(500)
+        binding.textLayoutSearch.editText?.textChangedListener()
+            ?.debounce(500)
             ?.onEach {
                 if (binding.textLayoutSearch.editText!!.isFocused) {
                     viewModel.getMovieListBySearch(it.toString())

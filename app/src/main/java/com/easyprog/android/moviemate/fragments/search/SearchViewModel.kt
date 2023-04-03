@@ -25,5 +25,4 @@ class SearchViewModel(
             _searchMovieList.postValue(movieList)
         }
     }
-
 }

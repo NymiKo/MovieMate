@@ -18,7 +18,7 @@ class FakeFirebaseSource: FirebaseSource {
         return if (!error) {
             Result.SUCCESS<List<Movie>>(movieList)
         } else {
-            Result.ERROR(Exception("No data"))
+            Result.ERROR("error")
         }
     }
 
@@ -27,7 +27,7 @@ class FakeFirebaseSource: FirebaseSource {
             val filterList = movieList.filter { movie -> movie.name.contains(searchQuery) }
             Result.SUCCESS(filterList)
         } else {
-            Result.ERROR(Exception("No data"))
+            Result.ERROR("error")
         }
     }
 }

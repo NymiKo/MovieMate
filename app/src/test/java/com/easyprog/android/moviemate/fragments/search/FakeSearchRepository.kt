@@ -8,13 +8,13 @@ class FakeSearchRepository : SearchRepository {
 
     private var searchMovieList: List<Movie> = emptyList()
     private var error = false
-    private var messageError: Exception = Exception()
+    private var messageError: String = ""
 
     fun setSearchMovieList(newSearchMovieList: List<Movie> = emptyList()) {
         searchMovieList = newSearchMovieList
     }
 
-    fun setError(messageError: Exception) {
+    fun setError(messageError: String) {
         this.messageError = messageError
         error = true
     }

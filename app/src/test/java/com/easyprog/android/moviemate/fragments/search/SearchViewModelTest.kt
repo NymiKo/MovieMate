@@ -45,7 +45,7 @@ class SearchViewModelTest {
 
     @Test
     fun `get an error on a search query`() = runTest {
-        val exception = Exception("Error")
+        val exception = "error"
         repository.setError(exception)
         viewModel.getMovieListBySearch("лы")
         val actualException = viewModel.searchMovieList.value

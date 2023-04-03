@@ -35,7 +35,7 @@ class MovieListFragment :
     private fun getMovieList() {
         viewModel.movieList.observe(viewLifecycleOwner) { result ->
             when(result) {
-                is Result.LOADING -> {
+                Result.LOADING -> {
 
                 }
                 is Result.ERROR -> {
