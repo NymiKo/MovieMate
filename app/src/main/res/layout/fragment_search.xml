@@ -37,20 +37,6 @@
         android:textSize="20sp"
         android:visibility="gone"/>
 
-    <FrameLayout
-        android:id="@+id/frame_layout_progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="?attr/colorPrimaryVariant"/>
-
-    </FrameLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_found_movies"
         android:layout_width="match_parent"

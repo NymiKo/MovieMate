@@ -28,7 +28,7 @@ class FirebaseSourceImpl : FirebaseSource {
             if (!snapshot.isEmpty) {
                 Result.SUCCESS(snapshot.toObjects(Movie::class.java))
             } else {
-                Result.ERROR("No data")
+                Result.SUCCESS(emptyList())
             }
         } catch (e: Exception) {
             Result.ERROR(e.message.toString())

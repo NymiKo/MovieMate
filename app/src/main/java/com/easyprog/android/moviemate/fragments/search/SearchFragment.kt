@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +66,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.textLayoutSearch.setStartIconOnClickListener {
             binding.textLayoutSearch.editText?.clearFocus()
             hideKeyboard()
+            hideTextViewNothingFound()
         }
     }
 
@@ -88,8 +90,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun searchListener() {
         binding.textLayoutSearch.editText?.textChangedListener()?.debounce(500)
             ?.onEach {
-                viewModel.getMovieListBySearch(it.toString())
-                getSearchResult()
+                if (binding.textLayoutSearch.editText!!.isFocused) {
+                    viewModel.getMovieListBySearch(it.toString())
+                    getSearchResult()
+                }
             }
             ?.launchIn(lifecycleScope)
     }
@@ -111,33 +115,26 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         viewModel.searchMovieList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> {
-                    hideProgressBar()
-                    checkResultError(result)
+                    showSnackBar(R.string.error_message)
                 }
                 Result.LOADING -> {
-                    hideTextViewNothingFound()
-                    showProgressBar()
+
                 }
                 is Result.SUCCESS -> {
-                    setResultToRecyclerView(result.data)
-                    hideTextViewNothingFound()
-                    hideProgressBar()
+                    checkResultSuccess(result.data)
                 }
             }
         }
     }
 
-    private fun checkResultError(result: Result.ERROR) {
-        if (result.error != "No data") showSnackBar(R.string.error_message)
-        else showTextViewNothingFound()
-    }
-
-    private fun hideProgressBar() {
-        binding.frameLayoutProgress.visibility = View.GONE
-    }
-
-    private fun showProgressBar() {
-        binding.frameLayoutProgress.visibility = View.GONE
+    private fun checkResultSuccess(data: List<Movie>) {
+        if (data.isNotEmpty()) {
+            setResultToRecyclerView(data)
+            hideTextViewNothingFound()
+        }
+        else {
+            showTextViewNothingFound()
+        }
     }
 
     private fun hideTextViewNothingFound() {
