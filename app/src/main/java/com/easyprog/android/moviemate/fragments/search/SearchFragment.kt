@@ -26,7 +26,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getSearchResult()
         setupView()
     }
 
@@ -88,7 +87,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun searchListener() {
         binding.textLayoutSearch.editText?.textChangedListener()?.debounce(500)
-            ?.onEach { viewModel.getMovieListBySearch(it.toString()) }
+            ?.onEach {
+                viewModel.getMovieListBySearch(it.toString())
+                getSearchResult()
+            }
             ?.launchIn(lifecycleScope)
     }
 
@@ -110,19 +112,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             when(result) {
                 is Result.ERROR -> {
                     hideProgressBar()
-                    showSnackBar(R.string.error_message)
-                    setResultToRecyclerView(emptyList())
+                    checkResultError(result)
                 }
                 Result.LOADING -> {
+                    hideTextViewNothingFound()
                     showProgressBar()
                 }
                 is Result.SUCCESS -> {
                     setResultToRecyclerView(result.data)
-                    Log.e("DATA", result.data.toString())
+                    hideTextViewNothingFound()
                     hideProgressBar()
                 }
             }
         }
+    }
+
+    private fun checkResultError(result: Result.ERROR) {
+        if (result.error != "No data") showSnackBar(R.string.error_message)
+        else showTextViewNothingFound()
     }
 
     private fun hideProgressBar() {
@@ -131,6 +138,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun showProgressBar() {
         binding.frameLayoutProgress.visibility = View.GONE
+    }
+
+    private fun hideTextViewNothingFound() {
+        binding.textNothingFound.visibility = View.GONE
+    }
+
+    private fun showTextViewNothingFound() {
+        binding.textNothingFound.visibility = View.VISIBLE
     }
 
 }

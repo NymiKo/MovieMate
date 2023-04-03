@@ -8,13 +8,13 @@ class FakeMovieListRepository : MovieRepository {
 
     private var movieList = emptyList<Movie>()
     private var error = false
-    private var massageError: Exception = Exception("")
+    private var massageError: String = ""
 
     fun setMovieList(newMovieList: List<Movie> = emptyList()) {
         movieList = newMovieList
     }
 
-    fun setMovieListError(massageError: Exception) {
+    fun setMovieListError(massageError: String) {
         this.massageError = massageError
         error = true
     }

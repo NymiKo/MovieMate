@@ -27,6 +27,16 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/text_nothing_found"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/nothing_found"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:visibility="gone"/>
+
     <FrameLayout
         android:id="@+id/frame_layout_progress"
         android:layout_width="match_parent"

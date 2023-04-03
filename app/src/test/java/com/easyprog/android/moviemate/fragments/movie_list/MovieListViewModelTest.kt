@@ -51,7 +51,7 @@ class MovieListViewModelTest {
 
     @Test
     fun `get a list of movies and check the result for an error`() = runTest {
-        val massageError = Exception("No data")
+        val massageError = "No data"
         repository.setMovieListError(massageError)
         viewModel.getMovieList()
         assertEquals(Result.ERROR(massageError), viewModel.movieList.value)

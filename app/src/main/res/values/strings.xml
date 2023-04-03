@@ -6,4 +6,5 @@
     <string name="search">Поиск</string>
     <string name="movie_not_found">Фильм не найден</string>
     <string name="error_message">Ошибка загрузки</string>
+    <string name="nothing_found">Ничего не найдено!</string>
 </resources>
