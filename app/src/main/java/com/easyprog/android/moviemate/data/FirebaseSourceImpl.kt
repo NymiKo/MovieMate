@@ -6,10 +6,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-private const val COLLECTION_MOVIES = "Movies"
-private const val ID = "id"
-
 class FirebaseSourceImpl : FirebaseSource {
+
+    private companion object {
+        private const val COLLECTION_MOVIES = "Movies"
+        private const val ID = "id"
+        val MOVIE_CLASS = Movie::class.java
+    }
 
     private val firestore = Firebase.firestore
 
@@ -25,11 +28,7 @@ class FirebaseSourceImpl : FirebaseSource {
 
     private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
         return try {
-            if (!snapshot.isEmpty) {
-                Result.SUCCESS(snapshot.toObjects(Movie::class.java))
-            } else {
-                Result.SUCCESS(emptyList())
-            }
+            Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
         } catch (e: Exception) {
             Result.ERROR(e.message.toString())
         }

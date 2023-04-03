@@ -67,6 +67,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             binding.textLayoutSearch.editText?.clearFocus()
             hideKeyboard()
             hideTextViewNothingFound()
+            setResultToRecyclerView(emptyList())
         }
     }
 
