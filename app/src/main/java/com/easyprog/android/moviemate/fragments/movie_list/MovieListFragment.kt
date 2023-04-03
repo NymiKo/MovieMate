@@ -18,7 +18,7 @@ import com.easyprog.android.moviemate.utils.showSnackBar
 class MovieListFragment :
     BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
 
-    private lateinit var mAdapter: MovieListAdapter
+    private var mAdapter = MovieListAdapter()
 
     private val viewModel: MovieListViewModel by viewModels { factory() }
 
@@ -51,9 +51,7 @@ class MovieListFragment :
     }
 
     private fun setupRecyclerView(movieList: List<Movie>) {
-        mAdapter = MovieListAdapter().apply {
-            this.movieList = movieList
-        }
+        mAdapter.movieList = movieList
         binding.recyclerViewMovieList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = mAdapter

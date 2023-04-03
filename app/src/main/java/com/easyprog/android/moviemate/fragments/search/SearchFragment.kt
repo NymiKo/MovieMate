@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.onEach
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     private val viewModel: SearchViewModel by viewModels { factory() }
-    private lateinit var mAdapter: SearchMovieAdapter
+    private var mAdapter = SearchMovieAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -100,16 +100,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun setupRecyclerView() {
-        mAdapter = SearchMovieAdapter()
-        binding.recyclerViewFoundMovies.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewFoundMovies.adapter = mAdapter
+        binding.recyclerViewFoundMovies.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = mAdapter
+        }
     }
 
     private fun setResultToRecyclerView(movieList: List<Movie>) {
-        mAdapter = SearchMovieAdapter().apply {
-            this.movieList = movieList
-        }
-        binding.recyclerViewFoundMovies.adapter = mAdapter
+        mAdapter.movieList = movieList
     }
 
     private fun getSearchResult() {
