@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="100dp"
     android:orientation="horizontal"
     android:layout_margin="@dimen/margin_small">
 
@@ -9,25 +9,33 @@
         android:id="@+id/image_movie_avatar"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2.5" />
+        android:layout_weight="1.7" />
 
-    <TextView
-        android:id="@+id/text_movie_name"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_weight="6.5"
-        android:textSize="18sp"
-        android:layout_marginHorizontal="@dimen/margin_small"
-        android:textColor="?attr/colorSecondaryVariant"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="8.3"
+        android:paddingStart="@dimen/padding_medium"
+        android:paddingEnd="@dimen/padding_medium">
 
-    <TextView
-        android:id="@+id/text_movie_rate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/text_movie_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:textColor="?attr/colorSecondaryVariant"/>
+
+        <TextView
+            android:id="@+id/text_movie_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </LinearLayout>

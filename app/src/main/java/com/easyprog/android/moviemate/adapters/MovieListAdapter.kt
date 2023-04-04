@@ -1,8 +1,12 @@
 package com.easyprog.android.moviemate.adapters
 
 import android.annotation.SuppressLint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.data.model.Movie
@@ -29,11 +33,22 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
         holder.binding.apply {
             textMovieName.text = movie.name.replaceFirstChar { it.uppercase() }
             imageMovieAvatar.loadImage(movie.image)
-            textRatingMovie.text = movie.rating
+            textRatingMovie.apply {
+                text = movie.rating
+                background = ContextCompat.getDrawable(root.context, setColorByRating(movie.rating.toInt()))
+            }
         }
     }
 
     override fun getItemCount(): Int = movieList.size
 
     class MovieListViewHolder(val binding: ItemMovieListBinding): RecyclerView.ViewHolder(binding.root)
+
+    private fun setColorByRating(rating: Int): Int {
+        return when(rating) {
+            in 8..10 -> R.drawable.high_rating_background
+            in 4..7 -> R.drawable.medium_rating_background
+            else -> R.drawable.low_rating_background
+        }
+    }
 }
