@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
@@ -28,6 +29,7 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
         holder.binding.apply {
             textMovieName.text = movie.name.replaceFirstChar { it.uppercase() }
             imageMovieAvatar.loadImage(movie.image)
+            textRatingMovie.text = movie.rating
         }
     }
 

@@ -1,15 +1,20 @@
 package com.easyprog.android.moviemate.utils
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.activity.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.channels.awaitClose
