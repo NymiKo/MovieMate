@@ -4,8 +4,9 @@ import com.easyprog.android.moviemate.data.FirebaseSource
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.domain.MovieRepository
+import javax.inject.Inject
 
-class MovieRepositoryImpl(private val firebaseSource: FirebaseSource): MovieRepository {
+class MovieRepositoryImpl @Inject constructor(private val firebaseSource: FirebaseSource): MovieRepository {
 
     override suspend fun getMovieList(): Result<List<Movie>> = firebaseSource.getMovieList()
 }

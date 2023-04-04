@@ -16,13 +16,15 @@ import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.fragments.base.factory
 import com.easyprog.android.moviemate.utils.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
-    private val viewModel: SearchViewModel by viewModels { factory() }
+    private val viewModel: SearchViewModel by viewModels()
     private var mAdapter = SearchMovieAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

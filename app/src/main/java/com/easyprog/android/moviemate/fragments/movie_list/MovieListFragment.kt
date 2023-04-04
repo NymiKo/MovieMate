@@ -14,13 +14,15 @@ import com.easyprog.android.moviemate.databinding.FragmentMovieListBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.fragments.base.factory
 import com.easyprog.android.moviemate.utils.showSnackBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieListFragment :
     BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
 
     private var mAdapter = MovieListAdapter()
 
-    private val viewModel: MovieListViewModel by viewModels { factory() }
+    private val viewModel: MovieListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

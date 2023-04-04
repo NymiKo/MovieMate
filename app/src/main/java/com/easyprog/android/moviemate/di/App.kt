@@ -10,19 +10,15 @@ import com.easyprog.android.moviemate.domain.implementation.SearchRepositoryImpl
 import com.google.android.material.color.DynamicColors
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class App: Application() {
 
-    lateinit var movieRepository: MovieRepository
-    lateinit var searchRepository: SearchRepository
-    private lateinit var firebase: FirebaseSource
 
     override fun onCreate() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
         FirebaseApp.initializeApp(applicationContext)
-        firebase = FirebaseSourceImpl()
-        movieRepository = MovieRepositoryImpl(firebase)
-        searchRepository = SearchRepositoryImpl(firebase)
     }
 }

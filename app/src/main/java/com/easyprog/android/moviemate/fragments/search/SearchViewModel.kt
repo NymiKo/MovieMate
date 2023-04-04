@@ -7,12 +7,17 @@ import androidx.lifecycle.viewModelScope
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.domain.SearchRepository
+import com.easyprog.android.moviemate.fragments.base.DispatchersList
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchViewModel(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val repository: SearchRepository,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: DispatchersList
 ) : ViewModel() {
 
     private val _searchMovieList = MutableLiveData<Result<List<Movie>>>()
@@ -20,7 +25,7 @@ class SearchViewModel(
 
     fun getMovieListBySearch(searchQuery: String) {
         _searchMovieList.value = Result.LOADING
-        viewModelScope.launch(dispatcher) {
+        viewModelScope.launch(dispatcher.io()) {
             val movieList = repository.getMovieListBySearch(searchQuery)
             _searchMovieList.postValue(movieList)
         }
