@@ -36,7 +36,8 @@ class SearchRepositoryImplTest {
     fun `get an error during the search`() = runTest {
         firestore.setMovieList(error = true)
         val actualException = repository.getMovieListBySearch("авт")
-        Assert.assertTrue(actualException is Result.ERROR)
+        val expectedException = Result.ERROR("error")
+        Assert.assertEquals(expectedException, actualException)
     }
 
     @Test
@@ -47,4 +48,24 @@ class SearchRepositoryImplTest {
         Assert.assertEquals(expectedList, actualList)
     }
 
+    @Test
+    fun `get recommended movies with a successful result`() = runTest {
+        val movieList = listOf(
+            Movie(0, "Милый дом"),
+            Movie(1, "Завтра"),
+            Movie(2, "Во имя мести")
+        )
+        firestore.setMovieList(movieList)
+        val actualList = repository.getRecommendedMovies()
+        val expectedList = Result.SUCCESS(movieList)
+        Assert.assertEquals(expectedList, actualList)
+    }
+
+    @Test
+    fun `get recommended movies with an error`() = runTest {
+        firestore.setMovieList(error = true)
+        val actualException = repository.getRecommendedMovies()
+        val expectedException = Result.ERROR("error")
+        Assert.assertEquals(expectedException, actualException)
+    }
 }

@@ -16,7 +16,15 @@ class FakeFirebaseSource: FirebaseSource {
 
     override suspend fun getMovieList(): Result<List<Movie>> {
         return if (!error) {
-            Result.SUCCESS<List<Movie>>(movieList)
+            Result.SUCCESS(movieList)
+        } else {
+            Result.ERROR("error")
+        }
+    }
+
+    override suspend fun getRecommendedMovies(): Result<List<Movie>> {
+        return if (!error) {
+             Result.SUCCESS(movieList)
         } else {
             Result.ERROR("error")
         }
