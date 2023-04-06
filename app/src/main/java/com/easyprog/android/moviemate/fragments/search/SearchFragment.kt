@@ -3,14 +3,15 @@ package com.easyprog.android.moviemate.fragments.search
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.CategoriesAdapter
 import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
 import com.easyprog.android.moviemate.data.Result
@@ -29,6 +30,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
     private var mAdapterSearchMovie = SearchMovieAdapter()
     private var mAdapterRecommendedMovies = RecommendedMoviesAdapter()
+    private var mAdapterCategories = CategoriesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +46,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         setupSearchEditText()
         setupFoundMovieRecyclerView()
         setupRecommendedMoviesRecyclerView()
+        setupCategoriesRecyclerView()
     }
 
     private fun setupSearchEditText() {
@@ -101,6 +104,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             setResultToFoundMovieRecyclerView(emptyList())
             binding.recyclerViewFoundMovies.visibility = View.GONE
             binding.layoutRecommendedMovies.visibility = View.VISIBLE
+            binding.layoutCategories.visibility = View.VISIBLE
         }
     }
 
@@ -165,6 +169,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
             binding.layoutRecommendedMovies.visibility = View.GONE
+            binding.layoutCategories.visibility = View.GONE
             binding.recyclerViewFoundMovies.visibility = View.VISIBLE
         }
         else {
@@ -201,6 +206,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.recyclerViewRecommendedMovies.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = mAdapterRecommendedMovies
+        }
+    }
+
+    private fun setupCategoriesRecyclerView() {
+        binding.recyclerViewCategories.apply {
+            layoutManager = StaggeredGridLayoutManager(3, RecyclerView.HORIZONTAL)
+            adapter = mAdapterCategories
         }
     }
 

@@ -55,7 +55,7 @@
         android:id="@+id/layout_recommended_movies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2.6"
+        android:layout_weight="3.5"
         android:orientation="vertical">
 
         <TextView
@@ -72,6 +72,33 @@
             android:id="@+id/recycler_view_recommended_movies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:layout_marginHorizontal="@dimen/margin_small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_categories"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_weight="3.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/categories"
+            android:textColor="?attr/colorSecondaryVariant"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:overScrollMode="never"
             android:layout_marginHorizontal="@dimen/margin_small" />
 
