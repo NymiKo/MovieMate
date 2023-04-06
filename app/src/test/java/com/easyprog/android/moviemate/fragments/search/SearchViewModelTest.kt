@@ -2,10 +2,9 @@ package com.easyprog.android.moviemate.fragments.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.easyprog.android.moviemate.CoroutineTestRule
+import com.easyprog.android.moviemate.FakeDispatcherList
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.data.Result
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -26,7 +25,7 @@ class SearchViewModelTest {
     @Before
     fun setupViewModel() {
         repository = FakeSearchRepository()
-        viewModel = SearchViewModel(repository, coroutineTestRule.testDispatcher)
+        viewModel = SearchViewModel(repository, FakeDispatcherList())
     }
 
     @Test
@@ -36,7 +35,7 @@ class SearchViewModelTest {
             Movie(1, "Завтра"),
             Movie(2, "Во имя мести")
         )
-        repository.setSearchMovieList(movieList)
+        repository.setMovieList(movieList)
         viewModel.getMovieListBySearch("лы")
         val actualList = viewModel.searchMovieList.value
         val expectedList = Result.SUCCESS(listOf(Movie(0, "Милый дом")))
@@ -59,6 +58,30 @@ class SearchViewModelTest {
         val actualList = viewModel.searchMovieList.value
         val expectedList = Result.SUCCESS(emptyList<Movie>())
         Assert.assertEquals(expectedList, actualList)
+    }
+
+    @Test
+    fun `get a list of recommended movies with a successful result`() = runTest {
+        val movieList = listOf(
+            Movie(0, "Милый дом"),
+            Movie(1, "Завтра"),
+            Movie(2, "Во имя мести")
+        )
+        repository.setMovieList(movieList)
+        viewModel.getRecommendedMovies()
+        val actualList = viewModel.recommendedMovieList.value
+        val expectedList = Result.SUCCESS(movieList)
+        Assert.assertEquals(expectedList, actualList)
+    }
+
+    @Test
+    fun `get a list of recommended movies with an error`() = runTest {
+        val messageError = "error"
+        repository.setError(messageError)
+        viewModel.getRecommendedMovies()
+        val actualException = viewModel.recommendedMovieList.value
+        val expectedException = Result.ERROR(messageError)
+        Assert.assertEquals(expectedException, actualException)
     }
 
 }
