@@ -1,20 +1,22 @@
 package com.easyprog.android.moviemate.fragments.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.base.factory
 import com.easyprog.android.moviemate.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
@@ -25,23 +27,47 @@ import kotlinx.coroutines.flow.onEach
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     private val viewModel: SearchViewModel by viewModels()
-    private var mAdapter = SearchMovieAdapter()
+    private var mAdapterSearchMovie = SearchMovieAdapter()
+    private var mAdapterRecommendedMovies = RecommendedMoviesAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.search.observe(viewLifecycleOwner) { search ->
+            binding.textLayoutSearch.editText?.setText(search)
+        }
+        viewModel.getRecommendedMovie()
         setupView()
     }
 
     private fun setupView() {
         showBottomNavView()
         setupSearchEditText()
-        searchListener()
-        setupRecyclerView()
+        setupFoundMovieRecyclerView()
+        setupRecommendedMoviesRecyclerView()
     }
 
     private fun setupSearchEditText() {
         clickEndIconSearchEditText()
         focusSearchEditTextListener()
+        setupImeOptionOnSearchEditText()
+        searchListener()
+    }
+
+    private fun setupImeOptionOnSearchEditText() {
+        binding.textLayoutSearch.editText?.setOnEditorActionListener { view, actionId, _ ->
+            return@setOnEditorActionListener actionListenerImeOptionsOnSearchEditText(actionId, view)
+        }
+    }
+
+    private fun actionListenerImeOptionsOnSearchEditText(actionId: Int, view: TextView): Boolean {
+        return when(actionId) {
+            EditorInfo.IME_ACTION_SEARCH -> {
+                if (view.text.isEmpty()) hideKeyboard()
+                else navigateTo(R.id.action_searchFragment_to_searchResultFragment)
+                true
+            }
+            else -> false
+        }
     }
 
     private fun focusSearchEditTextListener() {
@@ -66,10 +92,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun clickOnStartIconSearchEditText() {
         binding.textLayoutSearch.setStartIconOnClickListener {
-            binding.textLayoutSearch.editText?.clearFocus()
+            binding.textLayoutSearch.editText?.apply {
+                text.clear()
+                clearFocus()
+            }
             hideKeyboard()
             hideTextViewNothingFound()
-            setResultToRecyclerView(emptyList())
+            setResultToFoundMovieRecyclerView(emptyList())
         }
     }
 
@@ -102,15 +131,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             ?.launchIn(lifecycleScope)
     }
 
-    private fun setupRecyclerView() {
+    private fun setupFoundMovieRecyclerView() {
         binding.recyclerViewFoundMovies.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = mAdapter
+            adapter = mAdapterSearchMovie
         }
     }
 
-    private fun setResultToRecyclerView(movieList: List<Movie>) {
-        mAdapter.movieList = movieList
+    private fun setResultToFoundMovieRecyclerView(movieList: List<Movie>) {
+        mAdapterSearchMovie.movieList = movieList
     }
 
     private fun getSearchResult() {
@@ -131,7 +160,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun checkResultSuccess(data: List<Movie>) {
         if (data.isNotEmpty()) {
-            setResultToRecyclerView(data)
+            setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
         }
         else {
@@ -147,4 +176,30 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.textNothingFound.visibility = View.VISIBLE
     }
 
+    private fun getRecommendedMoviesResult() {
+        viewModel.recommendedMovieList.observe(viewLifecycleOwner) { result ->
+            when(result) {
+                is Result.ERROR -> showToast(R.string.error_message)
+                Result.LOADING -> showToast(R.string.error_message)
+                is Result.SUCCESS -> setResultToRecommendedMoviesRecyclerView(result.data)
+            }
+        }
+    }
+
+    private fun setResultToRecommendedMoviesRecyclerView(movieList: List<Movie>) {
+        mAdapterRecommendedMovies.recommendedMoviesList = movieList
+    }
+
+    private fun setupRecommendedMoviesRecyclerView() {
+        getRecommendedMoviesResult()
+        binding.recyclerViewRecommendedMovies.apply {
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            adapter = mAdapterRecommendedMovies
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        viewModel.saveSearch(binding.textLayoutSearch.editText?.text.toString())
+    }
 }

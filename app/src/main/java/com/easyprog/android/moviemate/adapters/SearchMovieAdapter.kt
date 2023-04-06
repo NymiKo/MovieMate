@@ -9,6 +9,7 @@ import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter.SearchMovieViewHolder
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemSearchMovieBinding
+import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
 class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
@@ -30,7 +31,7 @@ class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
         val movie = movieList[position]
         holder.binding.apply {
             imageMovieAvatar.loadImage(movie.image)
-            textMovieName.text = movie.name.replaceFirstChar { it.uppercase() }
+            textMovieName.text = movie.name.firstCharUppercase()
             textMovieRate.apply {
                 text = movie.rating
                 setTextColor(ContextCompat.getColor(root.context, setColorByRating(movie.rating.toInt())))

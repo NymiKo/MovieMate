@@ -21,10 +21,18 @@
         <action
             android:id="@+id/action_searchFragment_to_movieFilterFragment"
             app:destination="@id/movieFilterFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieFilterFragment"
         android:name="com.easyprog.android.moviemate.fragments.movie_filter.MovieFilterFragment"
         android:label="fragment_movie_filter"
         tools:layout="@layout/fragment_movie_filter" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.easyprog.android.moviemate.fragments.search_result.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
 </navigation>

@@ -57,3 +57,7 @@ fun EditText.textChangedListener(): Flow<CharSequence?> {
         awaitClose { removeTextChangedListener(listener) }
     }.onStart { emit(text) }
 }
+
+fun String.firstCharUppercase(): CharSequence {
+    return this.replaceFirstChar { it.uppercase() }
+}
