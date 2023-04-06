@@ -11,6 +11,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     private companion object {
         private const val COLLECTION_MOVIES = "Movies"
+        private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movies"
         private const val ID = "id"
         val MOVIE_CLASS = Movie::class.java
     }
@@ -24,6 +25,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
         val snapshot = firestore.collection(COLLECTION_MOVIES).whereEqualTo("name", searchQuery.lowercase()).get().await()
+        return getResult(snapshot)
+    }
+
+    override suspend fun getRecommendedMovies(): Result<List<Movie>> {
+        val snapshot = firestore.collection(COLLECTION_RECOMMENDED_MOVIES).get().await()
         return getResult(snapshot)
     }
 
