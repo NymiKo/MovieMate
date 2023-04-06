@@ -35,7 +35,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         viewModel.search.observe(viewLifecycleOwner) { search ->
             binding.textLayoutSearch.editText?.setText(search)
         }
-        viewModel.getRecommendedMovie()
+        viewModel.getRecommendedMovies()
         setupView()
     }
 
@@ -99,6 +99,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             hideKeyboard()
             hideTextViewNothingFound()
             setResultToFoundMovieRecyclerView(emptyList())
+            binding.recyclerViewFoundMovies.visibility = View.GONE
+            binding.layoutRecommendedMovies.visibility = View.VISIBLE
         }
     }
 
@@ -162,6 +164,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         if (data.isNotEmpty()) {
             setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
+            binding.layoutRecommendedMovies.visibility = View.GONE
+            binding.recyclerViewFoundMovies.visibility = View.VISIBLE
         }
         else {
             showTextViewNothingFound()
@@ -177,10 +181,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun getRecommendedMoviesResult() {
-        viewModel.recommendedMovieList.observe(viewLifecycleOwner) { result ->
+        viewModel.recommendedMoviesList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> showToast(R.string.error_message)
-                Result.LOADING -> showToast(R.string.error_message)
+                Result.LOADING -> {
+
+                }
                 is Result.SUCCESS -> setResultToRecommendedMoviesRecyclerView(result.data)
             }
         }

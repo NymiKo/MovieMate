@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="?attr/colorOnPrimary"
-    android:weightSum="10"
-    android:paddingHorizontal="@dimen/padding_small">
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/padding_small"
+    android:weightSum="10">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_layout_search"
@@ -16,11 +16,11 @@
         android:layout_weight="1"
         app:boxStrokeColor="?attr/colorOnPrimary"
         app:boxStrokeWidth="0dp"
-        app:endIconMode="custom"
         app:endIconDrawable="@drawable/ic_filter"
+        app:endIconMode="custom"
         app:endIconTint="?attr/colorSecondaryVariant"
-        app:startIconTint="?attr/colorSecondaryVariant"
-        app:startIconDrawable="@drawable/ic_search">
+        app:startIconDrawable="@drawable/ic_search"
+        app:startIconTint="?attr/colorSecondaryVariant">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -38,36 +38,42 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="9"
-        android:text="@string/nothing_found"
         android:gravity="center"
-        android:textStyle="bold"
+        android:text="@string/nothing_found"
         android:textSize="20sp"
-        android:visibility="gone"/>
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_found_movies"
         android:layout_width="match_parent"
-        android:layout_weight="9"
         android:layout_height="0dp"
-        android:visibility="gone"/>
+        android:layout_weight="9"
+        android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/layout_recommended_movies"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        android:layout_margin="@dimen/margin_small"
+        android:layout_weight="2.6"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:text="@string/recommended_movies"
+            android:textColor="?attr/colorSecondaryVariant"
             android:textSize="20sp"
-            android:textColor="?attr/colorSecondaryVariant" />
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_recommended_movies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:layout_marginHorizontal="@dimen/margin_small" />
 
     </LinearLayout>
 

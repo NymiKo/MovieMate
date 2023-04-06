@@ -2,6 +2,7 @@ package com.easyprog.android.moviemate.fragments.movie_list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.easyprog.android.moviemate.CoroutineTestRule
+import com.easyprog.android.moviemate.FakeDispatcherList
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.data.Result
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +29,7 @@ class MovieListViewModelTest {
     @Before
     fun setup() {
         repository = FakeMovieListRepository()
-        viewModel = MovieListViewModel(repository, coroutineTestRule.testDispatcher)
+        viewModel = MovieListViewModel(repository, FakeDispatcherList())
     }
 
     @Test
