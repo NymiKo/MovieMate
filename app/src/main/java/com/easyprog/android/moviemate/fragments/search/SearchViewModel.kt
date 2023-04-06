@@ -23,6 +23,9 @@ class SearchViewModel @Inject constructor(
     private val _searchMovieList = MutableLiveData<Result<List<Movie>>>()
     val searchMovieList: LiveData<Result<List<Movie>>> = _searchMovieList
 
+    private val _recommendedMoviesList = MutableLiveData<Result<List<Movie>>>()
+    val recommendedMoviesList: LiveData<Result<List<Movie>>> = _recommendedMoviesList
+
     private val _search = MutableLiveData<String>()
     val search: LiveData<String> = _search
 
@@ -31,6 +34,14 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.io()) {
             val movieList = repository.getMovieListBySearch(searchQuery)
             _searchMovieList.postValue(movieList)
+        }
+    }
+
+    fun getRecommendedMovies() {
+        _recommendedMoviesList.value = Result.LOADING
+        viewModelScope.launch(dispatcher.io()) {
+            val recommendedMovies = repository.getRecommendedMovies()
+            _recommendedMoviesList.postValue(recommendedMovies)
         }
     }
 

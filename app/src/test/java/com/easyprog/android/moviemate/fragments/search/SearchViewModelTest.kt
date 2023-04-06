@@ -69,7 +69,7 @@ class SearchViewModelTest {
         )
         repository.setMovieList(movieList)
         viewModel.getRecommendedMovies()
-        val actualList = viewModel.recommendedMovieList.value
+        val actualList = viewModel.recommendedMoviesList.value
         val expectedList = Result.SUCCESS(movieList)
         Assert.assertEquals(expectedList, actualList)
     }
@@ -79,7 +79,7 @@ class SearchViewModelTest {
         val messageError = "error"
         repository.setError(messageError)
         viewModel.getRecommendedMovies()
-        val actualException = viewModel.recommendedMovieList.value
+        val actualException = viewModel.recommendedMoviesList.value
         val expectedException = Result.ERROR(messageError)
         Assert.assertEquals(expectedException, actualException)
     }
