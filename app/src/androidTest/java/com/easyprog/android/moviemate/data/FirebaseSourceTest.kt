@@ -22,4 +22,10 @@ class FirebaseSourceTest {
         assertTrue(actualList is Result.SUCCESS<List<Movie>>)
     }
 
+    @Test
+    fun checkingFirebaseResultRecommendedMovies() = runBlocking {
+        val actualList = FirebaseSourceImpl().getRecommendedMovies()
+        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
+    }
+
 }
