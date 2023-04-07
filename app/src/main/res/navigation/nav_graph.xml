@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_searchFragment_to_searchResultFragment"
             app:destination="@id/searchResultFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieFilterFragment"
@@ -35,4 +38,9 @@
         android:name="com.easyprog.android.moviemate.fragments.search_result.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.easyprog.android.moviemate.fragments.category.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
 </navigation>

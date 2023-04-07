@@ -5,6 +5,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +15,12 @@ import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.CategoriesAdapter
 import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
+import com.easyprog.android.moviemate.adapters.categories.CategoriesActionListener
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
+import com.easyprog.android.moviemate.fragments.category.CategoryFragment
 import com.easyprog.android.moviemate.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
@@ -30,7 +33,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
     private var mAdapterSearchMovie = SearchMovieAdapter()
     private var mAdapterRecommendedMovies = RecommendedMoviesAdapter()
-    private var mAdapterCategories = CategoriesAdapter()
+    private var mAdapterCategories = CategoriesAdapter(object : CategoriesActionListener {
+        override fun categoryClick(category: String) {
+            navigateTo(R.id.action_searchFragment_to_categoryFragment, bundleOf("category" to category))
+        }
+    })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

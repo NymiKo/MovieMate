@@ -2,6 +2,7 @@ package com.easyprog.android.moviemate.utils
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -10,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -39,8 +41,8 @@ fun Fragment.hideKeyboard() {
     imm.hideSoftInputFromWindow(requireView().windowToken, 0)
 }
 
-fun Fragment.navigateTo(fragment: Int) {
-    findNavController().navigate(fragment)
+fun Fragment.navigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
+    findNavController().navigate(fragment, bundle)
 }
 
 fun Fragment.hideBottomNavView() {
