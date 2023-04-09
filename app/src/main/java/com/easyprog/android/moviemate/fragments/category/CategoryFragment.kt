@@ -21,6 +21,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(FragmentCategoryB
     private fun setupView() {
         hideBottomNavView()
         setupToolbar()
+        setupRecyclerView()
     }
 
     private fun setupToolbar() {

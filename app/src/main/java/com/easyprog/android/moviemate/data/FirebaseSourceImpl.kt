@@ -1,5 +1,6 @@
 package com.easyprog.android.moviemate.data
 
+import android.util.Log
 import com.easyprog.android.moviemate.data.model.Movie
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -11,7 +12,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     private companion object {
         private const val COLLECTION_MOVIES = "Movies"
-        private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movie"
+        private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movies"
         private const val ID = "id"
         val MOVIE_CLASS = Movie::class.java
     }

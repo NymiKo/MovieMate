@@ -112,6 +112,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             binding.recyclerViewFoundMovies.visibility = View.GONE
             binding.layoutRecommendedMovies.visibility = View.VISIBLE
             binding.layoutCategories.visibility = View.VISIBLE
+            binding.recyclerViewCategories.visibility = View.VISIBLE
         }
     }
 
@@ -190,6 +191,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun showTextViewNothingFound() {
         binding.textNothingFound.visibility = View.VISIBLE
+        binding.layoutRecommendedMovies.visibility = View.GONE
+        binding.recyclerViewCategories.visibility = View.GONE
     }
 
     private fun getRecommendedMoviesResult() {
