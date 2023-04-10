@@ -20,13 +20,20 @@
         android:label="SearchFragment" >
         <action
             android:id="@+id/action_searchFragment_to_movieFilterFragment"
-            app:destination="@id/movieFilterFragment" />
+            app:destination="@id/movieFilterFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_searchFragment_to_searchResultFragment"
             app:destination="@id/searchResultFragment" />
         <action
             android:id="@+id/action_searchFragment_to_categoryFragment"
             app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieFilterFragment"

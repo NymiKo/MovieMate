@@ -110,8 +110,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             hideTextViewNothingFound()
             setResultToFoundMovieRecyclerView(emptyList())
             binding.recyclerViewFoundMovies.visibility = View.GONE
-            binding.layoutRecommendedMovies.visibility = View.VISIBLE
-            binding.layoutCategories.visibility = View.VISIBLE
+            binding.groupRecommended.visibility = View.VISIBLE
             binding.recyclerViewCategories.visibility = View.VISIBLE
         }
     }
@@ -137,12 +136,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.textLayoutSearch.editText?.textChangedListener()
             ?.debounce(500)
             ?.onEach {
-                if (binding.textLayoutSearch.editText!!.isFocused) {
+                if (binding.textLayoutSearch.editText?.isFocused == true) {
                     viewModel.getMovieListBySearch(it.toString())
                     getSearchResult()
                 }
             }
-            ?.launchIn(lifecycleScope)
+            ?.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun setupFoundMovieRecyclerView() {
@@ -176,8 +175,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         if (data.isNotEmpty()) {
             setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
-            binding.layoutRecommendedMovies.visibility = View.GONE
-            binding.layoutCategories.visibility = View.GONE
+            binding.groupRecommended.visibility = View.GONE
             binding.recyclerViewFoundMovies.visibility = View.VISIBLE
         }
         else {
@@ -191,7 +189,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun showTextViewNothingFound() {
         binding.textNothingFound.visibility = View.VISIBLE
-        binding.layoutRecommendedMovies.visibility = View.GONE
+        binding.recyclerViewFoundMovies.visibility = View.GONE
+        binding.groupRecommended.visibility = View.GONE
         binding.recyclerViewCategories.visibility = View.GONE
     }
 

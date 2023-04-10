@@ -23,8 +23,10 @@ class MovieListViewModel @Inject constructor(
 
     fun getMovieList() {
         viewModelScope.launch(dispatcher.io()) {
-            val movieList = repository.getMovieList()
-            _movieList.postValue(movieList)
+            if (_movieList.value == null) {
+                val movieList = repository.getMovieList()
+                _movieList.postValue(movieList)
+            }
         }
     }
 }
