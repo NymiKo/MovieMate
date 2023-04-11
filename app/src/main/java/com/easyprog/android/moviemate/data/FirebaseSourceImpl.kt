@@ -43,6 +43,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return getResult(snapshot)
     }
 
+    override suspend fun getMoviesByCategory(category: String): Result<List<Movie>> {
+        val snapshot = getFirestore().collection(category).get().await()
+        return getResult(snapshot)
+    }
+
     private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
         return try {
             Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
