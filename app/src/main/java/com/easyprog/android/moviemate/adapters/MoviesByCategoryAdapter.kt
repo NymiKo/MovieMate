@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.adapters.MoviesByCategoryAdapter.MoviesByCategoryViewHolder
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemCategoryMovieBinding
+import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MoviesByCategoryAdapter: RecyclerView.Adapter<MoviesByCategoryViewHolder>() {
@@ -27,9 +28,9 @@ class MoviesByCategoryAdapter: RecyclerView.Adapter<MoviesByCategoryViewHolder>(
     override fun onBindViewHolder(holder: MoviesByCategoryViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
-            textElementId.text = position.toString()
+            textElementId.text = position.plus(1).toString()
             imageMovieAvatar.loadImage(movie.image)
-            textMovieName.text = movie.name
+            textMovieName.text = movie.name.firstCharUppercase()
         }
     }
 

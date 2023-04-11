@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/text_element_id"
@@ -11,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="center_horizontal"
+        android:fontFamily="sans-serif-medium"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="?attr/colorSecondaryVariant"
@@ -18,7 +20,7 @@
 
     <ImageView
         android:id="@+id/image_movie_avatar"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="100dp"/>
 
     <TextView
@@ -26,9 +28,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="9"
-        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:fontFamily="sans-serif-medium"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:gravity="center_vertical"
         android:textColor="?attr/colorSecondaryVariant"
         tools:text="Милый дом"/>
 

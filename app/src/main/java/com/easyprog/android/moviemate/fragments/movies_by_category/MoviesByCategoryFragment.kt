@@ -1,22 +1,33 @@
-package com.easyprog.android.moviemate.fragments.category
+package com.easyprog.android.moviemate.fragments.movies_by_category
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.easyprog.android.moviemate.adapters.MoviesByCategoryAdapter
+import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.databinding.FragmentMoviesByCategoryBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.utils.hideBottomNavView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(FragmentMoviesByCategoryBinding::inflate) {
 
     private val mAdapter = MoviesByCategoryAdapter()
     private val args: MoviesByCategoryFragmentArgs by navArgs()
+    private val viewModel: MoviesByCategoryViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getMoviesList(args.category)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupView()
+        getMovieList()
     }
 
     private fun setupView() {
@@ -33,6 +44,22 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
         binding.recyclerViewMovieList.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    private fun getMovieList() {
+        viewModel.moviesList.observe(viewLifecycleOwner) { result ->
+            when(result) {
+                is Result.ERROR -> {
+
+                }
+                Result.LOADING -> {
+
+                }
+                is Result.SUCCESS -> {
+                    mAdapter.movieList = result.data
+                }
+            }
         }
     }
 }

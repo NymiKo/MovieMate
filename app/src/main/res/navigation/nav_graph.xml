@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_search_result" />
     <fragment
         android:id="@+id/moviesByCategoryFragment"
-        android:name="com.easyprog.android.moviemate.fragments.category.MoviesByCategoryFragment"
+        android:name="com.easyprog.android.moviemate.fragments.movies_by_category.MoviesByCategoryFragment"
         android:label="fragment_movies_by_category"
         tools:layout="@layout/fragment_movies_by_category" >
         <argument
