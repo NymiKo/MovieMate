@@ -30,7 +30,7 @@
             app:destination="@id/searchResultFragment" />
         <action
             android:id="@+id/action_searchFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/moviesByCategoryFragment" />
         <action
             android:id="@+id/action_searchFragment_to_movieListFragment"
             app:destination="@id/movieListFragment" />
@@ -46,8 +46,13 @@
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
     <fragment
-        android:id="@+id/categoryFragment"
-        android:name="com.easyprog.android.moviemate.fragments.category.CategoryFragment"
-        android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        android:id="@+id/moviesByCategoryFragment"
+        android:name="com.easyprog.android.moviemate.fragments.category.MoviesByCategoryFragment"
+        android:label="fragment_movies_by_category"
+        tools:layout="@layout/fragment_movies_by_category" >
+        <argument
+            android:name="category"
+            app:argType="string"
+            android:defaultValue="Комедия" />
+    </fragment>
 </navigation>

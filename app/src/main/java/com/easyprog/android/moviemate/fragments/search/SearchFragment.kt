@@ -20,7 +20,6 @@ import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.category.CategoryFragment
 import com.easyprog.android.moviemate.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
@@ -35,7 +34,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private var mAdapterRecommendedMovies = RecommendedMoviesAdapter()
     private var mAdapterCategories = CategoriesAdapter(object : CategoriesActionListener {
         override fun categoryClick(category: String) {
-            navigateTo(R.id.action_searchFragment_to_categoryFragment, bundleOf("category" to category))
+            navigateTo(SearchFragmentDirections.actionSearchFragmentToCategoryFragment(category))
         }
     })
 

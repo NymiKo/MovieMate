@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.data
 
-import android.util.Log
 import com.easyprog.android.moviemate.data.model.Movie
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -34,7 +33,9 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
     }
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
-        val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(NAME, searchQuery.lowercase()).get().await()
+        val snapshot =
+            getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(NAME, searchQuery.lowercase())
+                .get().await()
         return getResult(snapshot)
     }
 
