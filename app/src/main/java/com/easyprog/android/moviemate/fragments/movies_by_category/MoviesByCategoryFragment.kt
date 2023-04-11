@@ -5,11 +5,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.MoviesByCategoryAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.databinding.FragmentMoviesByCategoryBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.utils.hideBottomNavView
+import com.easyprog.android.moviemate.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,6 +40,7 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
 
     private fun setupToolbar() {
         binding.collapsingToolbar.title = args.category
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     private fun setupRecyclerView() {
@@ -51,7 +54,7 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
         viewModel.moviesList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> {
-
+                    showSnackBar(R.string.error_message)
                 }
                 Result.LOADING -> {
 
@@ -61,5 +64,9 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
                 }
             }
         }
+    }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.onBackPressed()
     }
 }

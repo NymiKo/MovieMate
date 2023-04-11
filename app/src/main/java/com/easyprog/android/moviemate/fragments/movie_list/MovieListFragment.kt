@@ -31,7 +31,19 @@ class MovieListFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupView()
         getMovieList()
+    }
+
+    private fun setupView() {
+        setupRecyclerView()
+        setupButtonRepeat()
+    }
+
+    private fun setupButtonRepeat() {
+        binding.buttonRepeat.setOnClickListener {
+            viewModel.getMovieList()
+        }
     }
 
     private fun getMovieList() {
@@ -42,18 +54,19 @@ class MovieListFragment :
                 }
                 is Result.ERROR -> {
                     hideProgressBar()
+                    showButtonRepeat()
                     showSnackBar(R.string.error_message)
                 }
                 is Result.SUCCESS -> {
-                    setupRecyclerView(result.data)
+                    mAdapter.movieList = result.data
+                    hideButtonRepeat()
                     hideProgressBar()
                 }
             }
         }
     }
 
-    private fun setupRecyclerView(movieList: List<Movie>) {
-        mAdapter.movieList = movieList
+    private fun setupRecyclerView() {
         binding.recyclerViewMovieList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = mAdapter
@@ -62,5 +75,13 @@ class MovieListFragment :
 
     private fun hideProgressBar() {
         binding.frameLayoutProgress.visibility = View.GONE
+    }
+
+    private fun showButtonRepeat() {
+        binding.buttonRepeat.visibility = View.VISIBLE
+    }
+
+    private fun hideButtonRepeat() {
+        binding.buttonRepeat.visibility = View.GONE
     }
 }

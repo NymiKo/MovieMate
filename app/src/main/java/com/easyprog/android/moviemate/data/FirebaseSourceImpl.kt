@@ -28,7 +28,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
     }
 
     override suspend fun getMovieList(): Result<List<Movie>> {
-        val snapshot = getFirestore().collection(COLLECTION_MOVIES).orderBy(ID).get().await()
+        val snapshot = getFirestore().collection(COLLECTION_MOVIES).get().await()
         return getResult(snapshot)
     }
 
@@ -51,7 +51,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
         return try {
-            Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
+            if (!snapshot.isEmpty) {
+                Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
+            } else {
+                Result.ERROR("error")
+            }
         } catch (e: Exception) {
             Result.ERROR(e.message.toString())
         }

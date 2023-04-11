@@ -30,7 +30,9 @@
             app:destination="@id/searchResultFragment" />
         <action
             android:id="@+id/action_searchFragment_to_categoryFragment"
-            app:destination="@id/moviesByCategoryFragment" />
+            app:destination="@id/moviesByCategoryFragment"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_searchFragment_to_movieListFragment"
             app:destination="@id/movieListFragment" />

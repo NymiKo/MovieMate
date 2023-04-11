@@ -21,11 +21,13 @@
             app:expandedTitleTextAppearance="@style/TitleCollapsedToolbar"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_arrow_back"/>
+                app:navigationIcon="@drawable/ic_arrow_back"
+                app:navigationIconTint="?attr/colorSecondaryVariant"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
