@@ -28,4 +28,10 @@ class FirebaseSourceTest {
         assertTrue(actualList is Result.SUCCESS<List<Movie>>)
     }
 
+    @Test
+    fun checkingFirebaseResultMoviesByCategory() = runBlocking {
+        val actualList = FirebaseSourceImpl().getMoviesByCategory("ужасы")
+        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
+    }
+
 }
