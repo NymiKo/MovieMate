@@ -10,4 +10,8 @@
     <string name="recommended_movies">Советуем посмотреть</string>
     <string name="categories">Категории</string>
     <string name="repeat">Повторить</string>
+    <string name="description">Описание</string>
+    <string name="read_completely"><b>Читать полностью</b></string>
+    <string name="expandable_text">Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание</string>
+    <string name="roll_up">Свернуть</string>
 </resources>

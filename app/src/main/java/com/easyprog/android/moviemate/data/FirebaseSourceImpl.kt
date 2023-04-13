@@ -49,10 +49,21 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return getResult(snapshot)
     }
 
-    private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
+    override suspend fun getMovieInfo(idMovie: String): Result<Movie> {
+        val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(ID, idMovie)
+                .get().await()
+        return getResult(snapshot)
+    }
+
+    private inline fun <reified T : Any> getResult(snapshot: QuerySnapshot): Result<T> {
         return try {
             if (!snapshot.isEmpty) {
-                Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
+                val result = snapshot.toObjects(MOVIE_CLASS)
+                if (result.size == 1) {
+                    Result.SUCCESS(result[0] as T)
+                } else {
+                    Result.SUCCESS(result as T)
+                }
             } else {
                 Result.ERROR("error")
             }
@@ -60,4 +71,5 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
             Result.ERROR(e.message.toString())
         }
     }
+
 }

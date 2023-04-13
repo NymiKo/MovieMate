@@ -2,7 +2,10 @@ package com.easyprog.android.moviemate.utils
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -12,6 +15,7 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
@@ -48,6 +52,14 @@ fun Fragment.navigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
 
 fun Fragment.navigateTo(fragment: NavDirections) {
     findNavController().navigate(fragment)
+}
+
+fun String.fromHtmlToString(): Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(this)
+    }
 }
 
 fun Fragment.hideBottomNavView() {

@@ -12,6 +12,7 @@ import com.easyprog.android.moviemate.databinding.FragmentMovieListBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.fragments.movie_info.MovieInfoFragmentDirections
 import com.easyprog.android.moviemate.utils.navigateTo
+import com.easyprog.android.moviemate.utils.showBottomNavView
 import com.easyprog.android.moviemate.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 

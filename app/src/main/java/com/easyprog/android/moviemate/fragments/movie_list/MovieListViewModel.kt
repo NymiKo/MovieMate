@@ -1,5 +1,6 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
