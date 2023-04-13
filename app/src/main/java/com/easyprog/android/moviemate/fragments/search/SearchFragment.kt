@@ -5,14 +5,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.CategoriesAdapter
+import com.easyprog.android.moviemate.adapters.categories.CategoriesAdapter
 import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
 import com.easyprog.android.moviemate.adapters.categories.CategoriesActionListener

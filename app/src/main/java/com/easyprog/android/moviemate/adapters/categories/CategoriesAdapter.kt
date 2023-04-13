@@ -1,11 +1,10 @@
-package com.easyprog.android.moviemate.adapters
+package com.easyprog.android.moviemate.adapters.categories
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.easyprog.android.moviemate.adapters.CategoriesAdapter.CategoryViewHolder
-import com.easyprog.android.moviemate.adapters.categories.CategoriesActionListener
+import com.easyprog.android.moviemate.adapters.categories.CategoriesAdapter.CategoryViewHolder
 import com.easyprog.android.moviemate.databinding.ItemCategoriesBinding
 
 class CategoriesAdapter(

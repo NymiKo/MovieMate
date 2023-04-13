@@ -1,10 +1,8 @@
-package com.easyprog.android.moviemate.adapters
+package com.easyprog.android.moviemate.adapters.movie_list
 
 import android.annotation.SuppressLint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +12,9 @@ import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
-class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+class MovieListAdapter(
+    private val actionListener: MovieListActionListener
+): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -26,12 +26,16 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemMovieListBinding.inflate(inflater, parent, false)
+
+        binding.root.setOnClickListener(this)
+
         return MovieListViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
+            layoutMovieItem.tag = movie.id
             textMovieName.text = movie.name.firstCharUppercase()
             imageMovieAvatar.loadImage(movie.image)
             textRatingMovie.apply {
@@ -51,5 +55,10 @@ class MovieListAdapter: RecyclerView.Adapter<MovieListAdapter.MovieListViewHolde
             in 4..7 -> R.drawable.medium_rating_background
             else -> R.drawable.low_rating_background
         }
+    }
+
+    override fun onClick(v: View?) {
+        val idMovie = v?.tag as String
+        actionListener.onMovieClick(idMovie)
     }
 }

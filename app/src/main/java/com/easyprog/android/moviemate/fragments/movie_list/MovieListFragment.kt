@@ -1,18 +1,17 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.movie_list.MovieListActionListener
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.adapters.MovieListAdapter
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.adapters.movie_list.MovieListAdapter
 import com.easyprog.android.moviemate.databinding.FragmentMovieListBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.base.factory
+import com.easyprog.android.moviemate.fragments.movie_info.MovieInfoFragmentDirections
+import com.easyprog.android.moviemate.utils.navigateTo
 import com.easyprog.android.moviemate.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieListFragment :
     BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
 
-    private var mAdapter = MovieListAdapter()
+    private var mAdapter = MovieListAdapter(object : MovieListActionListener {
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(MovieListFragmentDirections.actionMovieListFragmentToMovieInfoFragment(idMovie))
+        }
+    })
 
     private val viewModel: MovieListViewModel by viewModels()
 

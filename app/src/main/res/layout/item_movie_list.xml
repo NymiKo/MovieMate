@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_margin="@dimen/margin_medium"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/layout_movie_item">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
