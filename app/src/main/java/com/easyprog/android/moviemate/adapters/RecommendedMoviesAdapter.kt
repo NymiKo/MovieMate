@@ -29,7 +29,7 @@ class RecommendedMoviesAdapter: RecyclerView.Adapter<RecommendedMoviesViewHolder
         val movie = recommendedMoviesList[position]
         holder.binding.apply {
             imageMovieAvatar.loadImage(movie.image)
-            textMovieName.text = movie.name.firstCharUppercase()
+            textMovieName.text = movie.name
         }
     }
 

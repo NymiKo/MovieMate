@@ -36,7 +36,7 @@ class MovieListAdapter(
         val movie = movieList[position]
         holder.binding.apply {
             layoutMovieItem.tag = movie.id
-            textMovieName.text = movie.name.firstCharUppercase()
+            textMovieName.text = movie.name
             imageMovieAvatar.loadImage(movie.image)
             textRatingMovie.apply {
                 text = movie.rating

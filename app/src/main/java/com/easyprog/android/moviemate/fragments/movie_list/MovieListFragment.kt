@@ -39,6 +39,11 @@ class MovieListFragment :
         getMovieList()
     }
 
+    override fun onStart() {
+        super.onStart()
+        showBottomNavView()
+    }
+
     private fun setupView() {
         setupRecyclerView()
         setupButtonRepeat()

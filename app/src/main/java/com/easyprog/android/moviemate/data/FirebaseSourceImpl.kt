@@ -14,7 +14,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         private const val COLLECTION_MOVIES = "Movies"
         private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movies"
         private const val ID = "id"
-        private const val NAME = "name"
+        private const val NAME = "name_for_search"
         val MOVIE_CLASS = Movie::class.java
     }
 

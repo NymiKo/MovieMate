@@ -30,7 +30,7 @@ class MoviesByCategoryAdapter: RecyclerView.Adapter<MoviesByCategoryViewHolder>(
         holder.binding.apply {
             textElementId.text = position.plus(1).toString()
             imageMovieAvatar.loadImage(movie.image)
-            textMovieName.text = movie.name.firstCharUppercase()
+            textMovieName.text = movie.name
         }
     }
 
