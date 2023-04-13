@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.adapters.MoviesByCategoryAdapter.MoviesByCategoryViewHolder
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemCategoryMovieBinding
-import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MoviesByCategoryAdapter: RecyclerView.Adapter<MoviesByCategoryViewHolder>() {

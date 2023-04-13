@@ -1,6 +1,7 @@
 package com.easyprog.android.moviemate.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
@@ -23,6 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.activity.MainActivity
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -41,6 +44,10 @@ fun <T> ImageView.loadImage(image: T) {
     Glide.with(this).load(image).fitCenter().centerCrop().into(this)
 }
 
+fun <T> ImageView.loadImageCollapsingToolbar(image: T) {
+    Glide.with(this).load(image).into(this)
+}
+
 fun Fragment.hideKeyboard() {
     val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(requireView().windowToken, 0)
@@ -52,14 +59,6 @@ fun Fragment.navigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
 
 fun Fragment.navigateTo(fragment: NavDirections) {
     findNavController().navigate(fragment)
-}
-
-fun String.fromHtmlToString(): Spanned {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        Html.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY)
-    } else {
-        Html.fromHtml(this)
-    }
 }
 
 fun Fragment.hideBottomNavView() {
@@ -77,6 +76,14 @@ fun EditText.textChangedListener(): Flow<CharSequence?> {
     }.onStart { emit(text) }
 }
 
-fun String.firstCharUppercase(): CharSequence {
-    return this.replaceFirstChar { it.uppercase() }
+fun Fragment.getColorFromTheme(color: Int): Int {
+    return MaterialColors.getColor(requireContext(), color, Color.WHITE)
+}
+
+fun String.fromHtmlToString(): Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(this)
+    }
 }

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
-import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MovieListAdapter(

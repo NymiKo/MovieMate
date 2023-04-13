@@ -9,7 +9,6 @@ import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter.SearchMovieViewHolder
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemSearchMovieBinding
-import com.easyprog.android.moviemate.utils.firstCharUppercase
 import com.easyprog.android.moviemate.utils.loadImage
 
 class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
