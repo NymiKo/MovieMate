@@ -60,10 +60,17 @@ class MovieInfoFragment :
                     binding.collapsingToolbar.title = result.data.name
                     binding.textExpandedDescription.text = result.data.description
                     binding.imageMovieAvatar.loadImageCollapsingToolbar(result.data.image)
-                    binding.textYearProduction.text = String.format("<b><font color=#2ECC71>%s</font></b>%s", getString(R.string.year_production), result.data.year_production).fromHtmlToString()
+                    binding.textYearProduction.text = getStringFormat(R.string.year_production, result.data.year_production).fromHtmlToString()
+                    binding.textCountry.text = getStringFormat(R.string.country, result.data.country).fromHtmlToString()
+                    binding.textGenre.text = getStringFormat(R.string.genre, result.data.category).fromHtmlToString()
+                    binding.textTime.text = getStringFormat(R.string.time, result.data.time).fromHtmlToString()
                 }
             }
         }
+    }
+
+    private fun getStringFormat(point: Int, result: String): String {
+        return String.format("<b><font color=#2ECC71>%s</font></b>%s", getString(point), result)
     }
 
     private fun setupToolbar() {

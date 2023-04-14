@@ -90,12 +90,19 @@
 
             <TextView
                 android:id="@+id/text_year_production"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="?attr/colorSecondaryVariant"
-                android:layout_marginVertical="@dimen/margin_small"
-                android:layout_marginHorizontal="@dimen/margin_medium"/>
+                style="@style/point_movie_info" />
+
+            <TextView
+                android:id="@+id/text_country"
+                style="@style/point_movie_info" />
+
+            <TextView
+                android:id="@+id/text_genre"
+                style="@style/point_movie_info" />
+
+            <TextView
+                android:id="@+id/text_time"
+                style="@style/point_movie_info" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

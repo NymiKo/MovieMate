@@ -15,5 +15,14 @@
         <item name="android:textSize">32sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
-    
+
+    <style name="point_movie_info">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/colorSecondaryVariant</item>
+        <item name="android:layout_marginVertical">@dimen/margin_small</item>
+        <item name="android:layout_marginHorizontal">@dimen/margin_medium</item>
+    </style>
+
 </resources>
