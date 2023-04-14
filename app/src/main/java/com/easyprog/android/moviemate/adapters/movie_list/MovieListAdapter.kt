@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.BaseActionListener
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MovieListAdapter(
-    private val actionListener: MovieListActionListener
+    private val actionListener: BaseActionListener
 ): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
@@ -57,7 +58,7 @@ class MovieListAdapter(
     }
 
     override fun onClick(v: View?) {
-        val idMovie = v?.tag as String
+        val idMovie = v?.tag.toString()
         actionListener.onMovieClick(idMovie)
     }
 }

@@ -2,6 +2,7 @@ package com.easyprog.android.moviemate.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,9 @@ import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemSearchMovieBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
-class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
+class SearchMovieAdapter(
+    private val actionListener: BaseActionListener
+): RecyclerView.Adapter<SearchMovieViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -23,12 +26,16 @@ class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchMovieViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemSearchMovieBinding.inflate(layoutInflater, parent, false)
+
+        binding.root.setOnClickListener(this)
+
         return SearchMovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SearchMovieViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
+            root.tag = movie.id
             imageMovieAvatar.loadImage(movie.image)
             textMovieName.text = movie.name
             textMovieRate.apply {
@@ -48,5 +55,10 @@ class SearchMovieAdapter: RecyclerView.Adapter<SearchMovieViewHolder>() {
             in 4..7 -> R.color.yellow
             else -> R.color.red
         }
+    }
+
+    override fun onClick(v: View?) {
+        val idMovie = v?.tag.toString()
+        actionListener.onMovieClick(idMovie)
     }
 }

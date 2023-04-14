@@ -5,12 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.movie_list.MovieListActionListener
+import com.easyprog.android.moviemate.adapters.BaseActionListener
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.adapters.movie_list.MovieListAdapter
 import com.easyprog.android.moviemate.databinding.FragmentMovieListBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.movie_info.MovieInfoFragmentDirections
 import com.easyprog.android.moviemate.utils.navigateTo
 import com.easyprog.android.moviemate.utils.showBottomNavView
 import com.easyprog.android.moviemate.utils.showSnackBar
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieListFragment :
     BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
 
-    private var mAdapter = MovieListAdapter(object : MovieListActionListener {
+    private var mAdapter = MovieListAdapter(object : BaseActionListener {
         override fun onMovieClick(idMovie: String) {
             navigateTo(MovieListFragmentDirections.actionMovieListFragmentToMovieInfoFragment(idMovie))
         }
