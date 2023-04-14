@@ -1,5 +1,6 @@
 package com.easyprog.android.moviemate.data
 
+import android.util.Log
 import com.easyprog.android.moviemate.data.model.Movie
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -49,21 +50,16 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return getResult(snapshot)
     }
 
-    override suspend fun getMovieInfo(idMovie: String): Result<Movie> {
+    override suspend fun getMovieInfo(idMovie: String): Result<List<Movie>> {
         val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(ID, idMovie)
                 .get().await()
         return getResult(snapshot)
     }
 
-    private inline fun <reified T : Any> getResult(snapshot: QuerySnapshot): Result<T> {
+    private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
         return try {
             if (!snapshot.isEmpty) {
-                val result = snapshot.toObjects(MOVIE_CLASS)
-                if (result.size == 1) {
-                    Result.SUCCESS(result[0] as T)
-                } else {
-                    Result.SUCCESS(result as T)
-                }
+                Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
             } else {
                 Result.ERROR("error")
             }
@@ -71,5 +67,4 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
             Result.ERROR(e.message.toString())
         }
     }
-
 }

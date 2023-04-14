@@ -9,5 +9,5 @@ import javax.inject.Inject
 class MovieInfoRepositoryImpl @Inject constructor(
     private val firebaseSource: FirebaseSource
 ): MovieInfoRepository {
-    override suspend fun getMovieInfo(idMovie: String): Result<Movie> = firebaseSource.getMovieInfo(idMovie)
+    override suspend fun getMovieInfo(idMovie: String): Result<List<Movie>> = firebaseSource.getMovieInfo(idMovie)
 }

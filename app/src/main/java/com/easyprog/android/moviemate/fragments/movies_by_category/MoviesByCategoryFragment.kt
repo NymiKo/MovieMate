@@ -20,7 +20,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(FragmentMoviesByCategoryBinding::inflate) {
 
-    private val mAdapter = MoviesByCategoryAdapter()
+    private val mAdapter = MoviesByCategoryAdapter(object : BaseActionListener {
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(MoviesByCategoryFragmentDirections.actionMoviesByCategoryFragmentToMovieInfoFragment(idMovie))
+        }
+    })
     private val args: MoviesByCategoryFragmentArgs by navArgs()
     private val viewModel: MoviesByCategoryViewModel by viewModels()
 

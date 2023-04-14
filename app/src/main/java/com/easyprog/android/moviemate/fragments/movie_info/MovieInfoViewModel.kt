@@ -18,13 +18,13 @@ class MovieInfoViewModel @Inject constructor(
     private val dispatcher: DispatchersList
 ): ViewModel() {
 
-    private val _movieInfo = MutableLiveData<Result<Movie>>()
-    val movieInfo: LiveData<Result<Movie>> = _movieInfo
+    private val _movieInfo = MutableLiveData<Result<List<Movie>>>()
+    val movieInfo: LiveData<Result<List<Movie>>> = _movieInfo
 
     fun getMovieInfo(idMovie: String) {
         viewModelScope.launch(dispatcher.io()) {
-            val movieList = repository.getMovieInfo(idMovie)
-            _movieInfo.postValue(movieList)
+            val movieInfo = repository.getMovieInfo(idMovie)
+            _movieInfo.postValue(movieInfo)
         }
     }
 

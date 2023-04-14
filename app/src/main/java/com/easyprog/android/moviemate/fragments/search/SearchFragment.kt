@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.BaseActionListener
 import com.easyprog.android.moviemate.adapters.categories.CategoriesAdapter
 import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
 import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
@@ -19,6 +20,7 @@ import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
+import com.easyprog.android.moviemate.fragments.movies_by_category.MoviesByCategoryFragmentDirections
 import com.easyprog.android.moviemate.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.debounce
@@ -29,8 +31,16 @@ import kotlinx.coroutines.flow.onEach
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     private val viewModel: SearchViewModel by viewModels()
-    private var mAdapterSearchMovie = SearchMovieAdapter()
-    private var mAdapterRecommendedMovies = RecommendedMoviesAdapter()
+    private var mAdapterSearchMovie = SearchMovieAdapter(object : BaseActionListener {
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(idMovie))
+        }
+    })
+    private var mAdapterRecommendedMovies = RecommendedMoviesAdapter(object : BaseActionListener {
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(idMovie))
+        }
+    })
     private var mAdapterCategories = CategoriesAdapter(object : CategoriesActionListener {
         override fun categoryClick(category: String) {
             navigateTo(SearchFragmentDirections.actionSearchFragmentToCategoryFragment(category))
@@ -157,7 +167,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         viewModel.searchMovieList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> {
-                    showSnackBar(R.string.error_message)
+                    showTextViewNothingFound()
                 }
                 Result.LOADING -> {
 

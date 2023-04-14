@@ -4,5 +4,5 @@ import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.data.Result
 
 interface MovieInfoRepository {
-    suspend fun getMovieInfo(idMovie: String): Result<Movie>
+    suspend fun getMovieInfo(idMovie: String): Result<List<Movie>>
 }
