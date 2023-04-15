@@ -36,8 +36,10 @@ fun Fragment.showToast(@StringRes message: Int) {
     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
 }
 
-fun Fragment.showSnackBar(@StringRes message: Int) {
-    Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+fun Fragment.showSnackBar(@StringRes message: Int, anchorView: Int? = R.id.bottom_nav_view) {
+    val snackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT)
+    if (anchorView != null) snackbar.setAnchorView(anchorView)
+    snackbar.show()
 }
 
 fun <T> ImageView.loadImage(image: T) {

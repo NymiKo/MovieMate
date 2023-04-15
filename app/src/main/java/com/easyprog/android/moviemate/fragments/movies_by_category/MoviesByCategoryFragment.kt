@@ -61,7 +61,7 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
         viewModel.moviesList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> {
-                    showSnackBar(R.string.error_message)
+                    showSnackBar(R.string.error_message, null)
                 }
                 Result.LOADING -> {
 
