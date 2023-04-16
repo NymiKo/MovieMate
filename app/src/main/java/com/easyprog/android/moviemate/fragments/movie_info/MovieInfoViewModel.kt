@@ -22,6 +22,7 @@ class MovieInfoViewModel @Inject constructor(
     val movieInfo: LiveData<Result<List<Movie>>> = _movieInfo
 
     fun getMovieInfo(idMovie: String) {
+        _movieInfo.value = Result.LOADING
         viewModelScope.launch(dispatcher.io()) {
             val movieInfo = repository.getMovieInfo(idMovie)
             _movieInfo.postValue(movieInfo)

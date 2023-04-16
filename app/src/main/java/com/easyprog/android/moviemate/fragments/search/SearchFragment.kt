@@ -144,9 +144,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.textLayoutSearch.editText?.textChangedListener()
             ?.debounce(500)
             ?.onEach {
-                if (binding.textLayoutSearch.editText?.isFocused == true) {
+                if (binding.textLayoutSearch.editText?.isFocused == true && binding.textLayoutSearch.editText?.text!!.isNotEmpty()) {
                     viewModel.getMovieListBySearch(it.toString())
                     getSearchResult()
+                } else {
+                    hideTextViewNothingFound()
+                    binding.recyclerViewFoundMovies.visibility = View.GONE
                 }
             }
             ?.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -183,10 +186,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         if (data.isNotEmpty()) {
             setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
-            binding.groupRecommended.visibility = View.GONE
             binding.recyclerViewFoundMovies.visibility = View.VISIBLE
-        }
-        else {
+        } else {
             showTextViewNothingFound()
         }
     }
@@ -198,8 +199,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     private fun showTextViewNothingFound() {
         binding.textNothingFound.visibility = View.VISIBLE
         binding.recyclerViewFoundMovies.visibility = View.GONE
-        binding.groupRecommended.visibility = View.GONE
-        binding.recyclerViewCategories.visibility = View.GONE
     }
 
     private fun getRecommendedMoviesResult() {

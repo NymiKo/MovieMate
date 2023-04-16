@@ -4,26 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorOnPrimary"
-    android:padding="@dimen/padding_medium"
     tools:context=".fragments.movie_list.MovieListFragment">
-
-    <FrameLayout
-        android:id="@+id/frame_layout_progress"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/light_green" />
-
-    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_movie_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_medium"
         android:overScrollMode="never" />
 
     <Button
@@ -33,5 +20,19 @@
         android:layout_gravity="center"
         android:text="@string/repeat"
         android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorOnPrimary">
+
+        <ProgressBar
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/light_green" />
+
+    </FrameLayout>
 
 </FrameLayout>

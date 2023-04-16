@@ -37,37 +37,11 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/text_nothing_found"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:gravity="center"
-        android:text="@string/nothing_found"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/text_layout_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_found_movies"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/text_layout_search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_recommended"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        app:constraint_referenced_ids="recommended_movies, recycler_view_recommended_movies, category, recycler_view_categories"/>
+        app:constraint_referenced_ids="recommended_movies, recycler_view_recommended_movies, category, recycler_view_categories" />
 
     <TextView
         android:id="@+id/recommended_movies"
@@ -89,10 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_small"
+        android:orientation="horizontal"
         android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recommended_movies" />
+        app:layout_constraintTop_toBottomOf="@+id/recommended_movies"
+        tools:listitem="@layout/item_recommended_movie" />
 
     <TextView
         android:id="@+id/category"
@@ -113,9 +90,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_small"
+        android:orientation="horizontal"
         android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/category" />
+        app:layout_constraintTop_toBottomOf="@+id/category"
+        app:spanCount="3"
+        tools:listitem="@layout/item_categories" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_found_movies"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:visibility="gone"
+        android:background="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_layout_search" />
+
+    <TextView
+        android:id="@+id/text_nothing_found"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:gravity="center"
+        android:text="@string/nothing_found"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:background="?attr/colorOnPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_layout_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

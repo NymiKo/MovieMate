@@ -1,6 +1,7 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -58,7 +59,7 @@ class MovieListFragment :
         viewModel.movieList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 Result.LOADING -> {
-
+                    showProgressBar()
                 }
                 is Result.ERROR -> {
                     hideProgressBar()
@@ -79,6 +80,10 @@ class MovieListFragment :
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = mAdapter
         }
+    }
+
+    private fun showProgressBar() {
+        binding.frameLayoutProgress.visibility = View.VISIBLE
     }
 
     private fun hideProgressBar() {

@@ -43,10 +43,11 @@ class MovieInfoFragment :
         viewModel.movieInfo.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.ERROR -> {
+                    binding.layoutProgress.visibility = View.GONE
                     showSnackBar(R.string.error_message, null)
                 }
                 Result.LOADING -> {
-
+                    binding.layoutProgress.visibility = View.VISIBLE
                 }
                 is Result.SUCCESS -> {
                     val movie = result.data[0]
@@ -63,6 +64,7 @@ class MovieInfoFragment :
                         getStringFormat(R.string.genre, movie.category).fromHtmlToString()
                     binding.textTime.text =
                         getStringFormat(R.string.time, movie.time).fromHtmlToString()
+                    binding.layoutProgress.visibility = View.GONE
                 }
             }
         }

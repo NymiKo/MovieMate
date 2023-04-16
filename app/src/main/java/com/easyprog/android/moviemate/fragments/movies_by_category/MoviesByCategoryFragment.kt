@@ -61,13 +61,15 @@ class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(F
         viewModel.moviesList.observe(viewLifecycleOwner) { result ->
             when(result) {
                 is Result.ERROR -> {
+                    binding.layoutProgress.visibility = View.GONE
                     showSnackBar(R.string.error_message, null)
                 }
                 Result.LOADING -> {
-
+                    binding.layoutProgress.visibility = View.VISIBLE
                 }
                 is Result.SUCCESS -> {
                     mAdapter.movieList = result.data
+                    binding.layoutProgress.visibility = View.GONE
                 }
             }
         }

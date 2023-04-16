@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +22,7 @@ class MovieListViewModel @Inject constructor(
     val movieList: LiveData<Result<List<Movie>>> = _movieList
 
     fun getMovieList() {
+        _movieList.value = Result.LOADING
         viewModelScope.launch(dispatcher.io()) {
             if (_movieList.value == null || _movieList.value != emptyList<Movie>()) {
                 val movieList = repository.getMovieList()

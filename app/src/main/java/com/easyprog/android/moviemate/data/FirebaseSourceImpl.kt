@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.data
 
-import android.util.Log
 import com.easyprog.android.moviemate.data.model.Movie
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -15,7 +14,8 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         private const val COLLECTION_MOVIES = "Movies"
         private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movies"
         private const val ID = "id"
-        private const val NAME = "name_for_search"
+        private const val NAME_FOR_SEARCH = "name_for_search"
+        private const val NAME = "name"
         val MOVIE_CLASS = Movie::class.java
     }
 
@@ -35,7 +35,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
         val snapshot =
-            getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(NAME, searchQuery.lowercase())
+            getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(NAME_FOR_SEARCH, searchQuery.lowercase())
                 .get().await()
         return getResult(snapshot)
     }
@@ -46,13 +46,13 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
     }
 
     override suspend fun getMoviesByCategory(category: String): Result<List<Movie>> {
-        val snapshot = getFirestore().collection(category.lowercase()).get().await()
+        val snapshot = getFirestore().collection(category.lowercase()).orderBy(NAME).get().await()
         return getResult(snapshot)
     }
 
     override suspend fun getMovieInfo(idMovie: String): Result<List<Movie>> {
         val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(ID, idMovie)
-                .get().await()
+            .get().await()
         return getResult(snapshot)
     }
 

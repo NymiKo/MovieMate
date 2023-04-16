@@ -8,6 +8,7 @@
 
     <style name="TitleToolbar" parent="TextAppearance.AppCompat.Title">
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
     <style name="TitleExpandToolbar" parent="TextAppearance.AppCompat.Title">

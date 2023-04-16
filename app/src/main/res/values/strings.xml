@@ -18,4 +18,5 @@
     <string name="country">Страна: </string>
     <string name="genre">Жанр: </string>
     <string name="time">Время: </string>
+    <string name="search_for_the_best_movies">Поиск лучших фильмов</string>
 </resources>
