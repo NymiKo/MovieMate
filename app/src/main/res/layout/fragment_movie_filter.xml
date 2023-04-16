@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorOnPrimary"
+    android:orientation="vertical"
     tools:context=".fragments.movie_filter.MovieFilterFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,10 +13,55 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorOnPrimary"
-        app:title="@string/search_for_the_best_movies"
-        app:titleTextAppearance="@style/TitleToolbar"
         app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:navigationIconTint="?attr/colorSecondaryVariant"/>
+        app:navigationIconTint="?attr/colorSecondaryVariant"
+        app:title="@string/search_for_the_best_movies"
+        app:titleTextAppearance="@style/TitleToolbar" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/text_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/rating"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <TextView
+        android:id="@+id/text_selected_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?attr/colorSecondaryVariant"
+        app:layout_constraintBottom_toBottomOf="@+id/text_rating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@+id/text_rating"
+        app:layout_constraintTop_toTopOf="@+id/text_rating" />
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/slider_rating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:stepSize="1.0"
+        android:valueFrom="1.0"
+        android:valueTo="10.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_rating"
+        app:values="@array/initial_range_slider_values" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

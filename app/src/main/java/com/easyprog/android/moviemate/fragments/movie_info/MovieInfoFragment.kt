@@ -43,11 +43,12 @@ class MovieInfoFragment :
         viewModel.movieInfo.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.ERROR -> {
-                    binding.layoutProgress.visibility = View.GONE
+                    binding.progress.hide()
                     showSnackBar(R.string.error_message, null)
                 }
                 Result.LOADING -> {
-                    binding.layoutProgress.visibility = View.VISIBLE
+                    binding.contentMovieInfo.visibility = View.GONE
+                    binding.progress.show()
                 }
                 is Result.SUCCESS -> {
                     val movie = result.data[0]
@@ -64,14 +65,15 @@ class MovieInfoFragment :
                         getStringFormat(R.string.genre, movie.category).fromHtmlToString()
                     binding.textTime.text =
                         getStringFormat(R.string.time, movie.time).fromHtmlToString()
-                    binding.layoutProgress.visibility = View.GONE
+                    binding.contentMovieInfo.visibility = View.VISIBLE
+                    binding.progress.hide()
                 }
             }
         }
     }
 
     private fun getStringFormat(point: Int, result: String): String {
-        return String.format("<b><font color=#2ECC71>%s</font></b>%s", getString(point), result)
+        return String.format("<b><font color=#2ECC71>%s</font></b> %s", getString(point), result)
     }
 
     private fun setupToolbar() {

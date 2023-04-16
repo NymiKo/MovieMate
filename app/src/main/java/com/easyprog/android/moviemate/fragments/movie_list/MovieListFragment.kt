@@ -83,11 +83,11 @@ class MovieListFragment :
     }
 
     private fun showProgressBar() {
-        binding.frameLayoutProgress.visibility = View.VISIBLE
+        binding.progress.show()
     }
 
     private fun hideProgressBar() {
-        binding.frameLayoutProgress.visibility = View.GONE
+        binding.progress.hide()
     }
 
     private fun showButtonRepeat() {

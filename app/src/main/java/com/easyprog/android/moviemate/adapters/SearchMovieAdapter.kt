@@ -39,7 +39,7 @@ class SearchMovieAdapter(
             imageMovieAvatar.loadImage(movie.image)
             textMovieName.text = movie.name
             textMovieRate.apply {
-                text = movie.rating
+                text = movie.rating.toString()
                 setTextColor(ContextCompat.getColor(root.context, setColorByRating(movie.rating.toInt())))
             }
         }

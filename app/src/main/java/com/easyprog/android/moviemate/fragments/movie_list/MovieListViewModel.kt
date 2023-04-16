@@ -9,6 +9,7 @@ import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.domain.MovieRepository
 import com.easyprog.android.moviemate.fragments.base.DispatchersList
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -21,18 +21,15 @@
         android:text="@string/repeat"
         android:visibility="gone" />
 
-    <FrameLayout
-        android:id="@+id/frame_layout_progress"
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorOnPrimary">
-
-        <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/light_green" />
-
-    </FrameLayout>
+        android:layout_gravity="center"
+        android:background="?attr/colorOnPrimary"
+        android:indeterminateTint="@color/light_green"
+        android:scaleX="0.10"
+        android:scaleY="0.10" />
 
 </FrameLayout>

@@ -39,7 +39,7 @@ class MovieListAdapter(
             textMovieName.text = movie.name
             imageMovieAvatar.loadImage(movie.image)
             textRatingMovie.apply {
-                text = movie.rating
+                text = movie.rating.toString()
                 background = ContextCompat.getDrawable(root.context, setColorByRating(movie.rating.toInt()))
             }
         }

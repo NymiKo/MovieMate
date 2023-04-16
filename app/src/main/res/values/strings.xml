@@ -19,4 +19,9 @@
     <string name="genre">Жанр: </string>
     <string name="time">Время: </string>
     <string name="search_for_the_best_movies">Поиск лучших фильмов</string>
+    <string name="rating">Рейтинг</string>
+    <string name="slider_initial_string">неважно</string>
+    <string name="from">от %d</string>
+    <string name="to">до %d</string>
+    <string name="from_to">от %d до %d</string>
 </resources>
