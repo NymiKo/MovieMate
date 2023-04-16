@@ -11,7 +11,7 @@ class CategoriesAdapter(
     private val actionListener: CategoriesActionListener
 ): RecyclerView.Adapter<CategoryViewHolder>(), View.OnClickListener {
 
-    var categoriesList: List<String> = listOf("Фэнтези", "Сериалы", "Ужасы", "Триллер", "Драма", "Детектив", "Боевик", "Комедия", "Фантастика")
+    var categoriesList: List<String> = listOf("Фэнтези", "Криминал", "Ужасы", "Триллер", "Драма", "Детектив", "Боевик", "Комедия", "Фантастика")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
