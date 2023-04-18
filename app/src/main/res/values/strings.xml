@@ -12,7 +12,6 @@
     <string name="repeat">Повторить</string>
     <string name="description">Описание</string>
     <string name="read_completely"><b>Читать полностью</b></string>
-    <string name="expandable_text">Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание Описание</string>
     <string name="roll_up">Свернуть</string>
     <string name="year_production">Год выхода: </string>
     <string name="country">Страна: </string>
@@ -26,4 +25,6 @@
     <string name="country_filter">Страна</string>
     <string name="any_country">любая</string>
     <string name="year">Год</string>
+    <string name="films">Фильмы</string>
+    <string name="serials">Сериалы</string>
 </resources>

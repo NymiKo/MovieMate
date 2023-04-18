@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/colorOnPrimary"
-    tools:context=".fragments.movie_list.MovieListFragment">
+    android:orientation="vertical"
+    tools:context=".fragments.movie_list.MovieListTabFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_movie_list"
@@ -32,4 +34,4 @@
         android:scaleX="0.10"
         android:scaleY="0.10" />
 
-</FrameLayout>
+</LinearLayout>

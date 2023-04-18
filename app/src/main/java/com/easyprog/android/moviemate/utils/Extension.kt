@@ -21,6 +21,7 @@ import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.easyprog.android.moviemate.R
@@ -56,11 +57,15 @@ fun Fragment.hideKeyboard() {
 }
 
 fun Fragment.navigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
-    findNavController().navigate(fragment, bundle)
+    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container).navigate(fragment, bundle)
 }
 
 fun Fragment.navigateTo(fragment: NavDirections) {
-    findNavController().navigate(fragment)
+    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container).navigate(fragment)
+}
+
+fun Fragment.mainNavGraphNavigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
+    Navigation.findNavController(requireActivity(), R.id.nav_host_main_fragment_container).navigate(fragment, bundle)
 }
 
 fun Fragment.hideBottomNavView() {

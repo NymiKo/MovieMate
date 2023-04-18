@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/movieListFragment"
+    <item android:id="@+id/mainFragment"
         android:title="@string/main"
         android:icon="@drawable/ic_home"/>
 
