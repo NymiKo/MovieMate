@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.adapters.movie_list
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,12 @@ import com.easyprog.android.moviemate.utils.loadImage
 
 class MovieListAdapter(
     private val actionListener: BaseActionListener
-): RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>(), View.OnClickListener {
+) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
-            notifyDataSetChanged()
+            notifyItemRangeInserted(0, newValue.size)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
@@ -40,17 +38,19 @@ class MovieListAdapter(
             imageMovieAvatar.loadImage(movie.image)
             textRatingMovie.apply {
                 text = movie.rating.toString()
-                background = ContextCompat.getDrawable(root.context, setColorByRating(movie.rating.toInt()))
+                background =
+                    ContextCompat.getDrawable(root.context, setColorByRating(movie.rating.toInt()))
             }
         }
     }
 
     override fun getItemCount(): Int = movieList.size
 
-    class MovieListViewHolder(val binding: ItemMovieListBinding): RecyclerView.ViewHolder(binding.root)
+    class MovieListViewHolder(val binding: ItemMovieListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private fun setColorByRating(rating: Int): Int {
-        return when(rating) {
+        return when (rating) {
             in 8..10 -> R.drawable.high_rating_background
             in 4..7 -> R.drawable.medium_rating_background
             else -> R.drawable.low_rating_background

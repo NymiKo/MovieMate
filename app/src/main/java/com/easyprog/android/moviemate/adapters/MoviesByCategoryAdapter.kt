@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +11,12 @@ import com.easyprog.android.moviemate.utils.loadImage
 
 class MoviesByCategoryAdapter(
     private val actionListener: BaseActionListener
-): RecyclerView.Adapter<MoviesByCategoryViewHolder>(), View.OnClickListener {
+) : RecyclerView.Adapter<MoviesByCategoryViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
-            notifyDataSetChanged()
+            notifyItemRangeInserted(0, newValue.size)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesByCategoryViewHolder {
@@ -42,7 +40,8 @@ class MoviesByCategoryAdapter(
 
     override fun getItemCount(): Int = movieList.size
 
-    class MoviesByCategoryViewHolder(val binding: ItemCategoryMovieBinding): RecyclerView.ViewHolder(binding.root)
+    class MoviesByCategoryViewHolder(val binding: ItemCategoryMovieBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onClick(v: View?) {
         val idMovie = v?.tag.toString()

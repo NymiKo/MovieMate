@@ -5,12 +5,14 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.easyprog.android.moviemate.R
+import com.easyprog.android.moviemate.adapters.view_pager.PagerFragmentAdapter
 import com.easyprog.android.moviemate.databinding.FragmentMainBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.utils.mainNavGraphNavigateTo
 import com.easyprog.android.moviemate.utils.navigateTo
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,24 +30,14 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
     }
 
     private fun setupTabLayout() {
+        binding.viewPager.adapter = PagerFragmentAdapter(requireActivity())
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            val tabName = listOf(R.string.main, R.string.films, R.string.serials)
+            tab.text = getString(tabName[position])
+        }.attach()
         viewModel.positionTab.observe(viewLifecycleOwner) {
             binding.tabLayout.getTabAt(it)?.select()
         }
-        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.position) {
-                    0 -> mainNavGraphNavigateTo(R.id.mainTabFragment)
-                    1 -> mainNavGraphNavigateTo(R.id.movieListTabFragment)
-                    2 -> mainNavGraphNavigateTo(R.id.serialsListTabFragment)
-                }
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-        })
     }
 
     override fun onStop() {

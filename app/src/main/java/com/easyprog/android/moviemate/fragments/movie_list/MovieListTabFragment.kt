@@ -37,8 +37,8 @@ class MovieListTabFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
         getMovieList()
+        setupView()
     }
 
     override fun onStart() {
@@ -81,6 +81,7 @@ class MovieListTabFragment :
         binding.recyclerViewMovieList.apply {
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = mAdapter
+            setHasFixedSize(true)
         }
     }
 

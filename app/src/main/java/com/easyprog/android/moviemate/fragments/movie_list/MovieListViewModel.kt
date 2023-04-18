@@ -23,9 +23,9 @@ class MovieListViewModel @Inject constructor(
     val movieList: LiveData<Result<List<Movie>>> = _movieList
 
     fun getMovieList() {
-        _movieList.value = Result.LOADING
         viewModelScope.launch(dispatcher.io()) {
             if (_movieList.value == null || _movieList.value != emptyList<Movie>()) {
+                _movieList.postValue(Result.LOADING)
                 val movieList = repository.getMovieList()
                 _movieList.postValue(movieList)
             }

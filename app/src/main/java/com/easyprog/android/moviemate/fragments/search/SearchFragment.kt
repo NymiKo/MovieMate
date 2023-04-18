@@ -184,9 +184,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun checkResultSuccess(data: List<Movie>) {
         if (data.isNotEmpty()) {
+            binding.recyclerViewFoundMovies.visibility = View.VISIBLE
             setResultToFoundMovieRecyclerView(data)
             hideTextViewNothingFound()
-            binding.recyclerViewFoundMovies.visibility = View.VISIBLE
         } else {
             showTextViewNothingFound()
         }

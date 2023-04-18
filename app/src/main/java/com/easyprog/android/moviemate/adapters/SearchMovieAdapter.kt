@@ -1,6 +1,5 @@
 package com.easyprog.android.moviemate.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,12 @@ import com.easyprog.android.moviemate.utils.loadImage
 
 class SearchMovieAdapter(
     private val actionListener: BaseActionListener
-): RecyclerView.Adapter<SearchMovieViewHolder>(), View.OnClickListener {
+) : RecyclerView.Adapter<SearchMovieViewHolder>(), View.OnClickListener {
 
     var movieList: List<Movie> = emptyList()
-        @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
-            notifyDataSetChanged()
+            notifyItemChanged(0)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchMovieViewHolder {
@@ -40,17 +38,23 @@ class SearchMovieAdapter(
             textMovieName.text = movie.name
             textMovieRate.apply {
                 text = movie.rating.toString()
-                setTextColor(ContextCompat.getColor(root.context, setColorByRating(movie.rating.toInt())))
+                setTextColor(
+                    ContextCompat.getColor(
+                        root.context,
+                        setColorByRating(movie.rating.toInt())
+                    )
+                )
             }
         }
     }
 
     override fun getItemCount(): Int = movieList.size
 
-    class SearchMovieViewHolder(val binding: ItemSearchMovieBinding): RecyclerView.ViewHolder(binding.root)
+    class SearchMovieViewHolder(val binding: ItemSearchMovieBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     private fun setColorByRating(rating: Int): Int {
-        return when(rating) {
+        return when (rating) {
             in 8..10 -> R.color.green
             in 4..7 -> R.color.yellow
             else -> R.color.red
