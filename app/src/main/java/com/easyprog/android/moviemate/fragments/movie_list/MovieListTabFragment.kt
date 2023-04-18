@@ -7,14 +7,11 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.BaseActionListener
-import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.adapters.movie_list.MovieListAdapter
+import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.databinding.FragmentMovieListTabBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.main.MainFragmentDirections
-import com.easyprog.android.moviemate.utils.mainNavGraphNavigateTo
 import com.easyprog.android.moviemate.utils.navigateTo
-import com.easyprog.android.moviemate.utils.showBottomNavView
 import com.easyprog.android.moviemate.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,11 +38,6 @@ class MovieListTabFragment :
         setupView()
     }
 
-    override fun onStart() {
-        super.onStart()
-        showBottomNavView()
-    }
-
     private fun setupView() {
         setupRecyclerView()
         setupButtonRepeat()
@@ -59,7 +51,7 @@ class MovieListTabFragment :
 
     private fun getMovieList() {
         viewModel.movieList.observe(viewLifecycleOwner) { result ->
-            when(result) {
+            when (result) {
                 Result.LOADING -> {
                     showProgressBar()
                 }
@@ -82,6 +74,7 @@ class MovieListTabFragment :
             layoutManager = GridLayoutManager(requireContext(), 2)
             adapter = mAdapter
             setHasFixedSize(true)
+            setItemViewCacheSize(4)
         }
     }
 

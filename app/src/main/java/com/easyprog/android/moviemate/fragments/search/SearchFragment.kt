@@ -56,8 +56,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         setupView()
     }
 
-    private fun setupView() {
+    override fun onStart() {
+        super.onStart()
         showBottomNavView()
+    }
+
+    private fun setupView() {
         setupSearchEditText()
         setupFoundMovieRecyclerView()
         setupRecommendedMoviesRecyclerView()
@@ -222,6 +226,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.recyclerViewRecommendedMovies.apply {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             adapter = mAdapterRecommendedMovies
+            itemAnimator = null
         }
     }
 

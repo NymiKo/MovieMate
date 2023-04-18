@@ -57,15 +57,11 @@ fun Fragment.hideKeyboard() {
 }
 
 fun Fragment.navigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
-    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container).navigate(fragment, bundle)
+    findNavController().navigate(fragment, bundle)
 }
 
 fun Fragment.navigateTo(fragment: NavDirections) {
-    Navigation.findNavController(requireActivity(), R.id.nav_host_fragment_container).navigate(fragment)
-}
-
-fun Fragment.mainNavGraphNavigateTo(fragment: Int, bundle: Bundle = bundleOf()) {
-    Navigation.findNavController(requireActivity(), R.id.nav_host_main_fragment_container).navigate(fragment, bundle)
+    findNavController().navigate(fragment)
 }
 
 fun Fragment.hideBottomNavView() {
