@@ -8,5 +8,5 @@ import javax.inject.Inject
 
 class MovieListRepositoryImpl @Inject constructor(private val firebaseSource: FirebaseSource): MovieRepository {
 
-    override suspend fun getMovieList(): Result<List<Movie>> = firebaseSource.getMovieList()
+    override suspend fun getMovieList(catalog: String): Result<List<Movie>> = firebaseSource.getMovieList(catalog)
 }

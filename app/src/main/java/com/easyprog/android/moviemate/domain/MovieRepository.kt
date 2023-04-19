@@ -5,6 +5,6 @@ import com.easyprog.android.moviemate.data.Result
 
 interface MovieRepository {
 
-    suspend fun getMovieList(): Result<List<Movie>>
+    suspend fun getMovieList(catalog: String): Result<List<Movie>>
 
 }

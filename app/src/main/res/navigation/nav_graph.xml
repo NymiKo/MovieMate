@@ -79,5 +79,41 @@
         <action
             android:id="@+id/action_mainFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_movieListTabFragment"
+            app:destination="@id/movieListTabFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_serialsListTabFragment"
+            app:destination="@id/serialsListTabFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainTabFragment"
+            app:destination="@id/mainTabFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainTabFragment"
+        android:name="com.easyprog.android.moviemate.fragments.main_tab.MainTabFragment"
+        android:label="fragment_main_tab"
+        tools:layout="@layout/fragment_main_tab" >
+        <action
+            android:id="@+id/action_mainTabFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieListTabFragment"
+        android:name="com.easyprog.android.moviemate.fragments.movie_list.MovieListTabFragment"
+        android:label="fragment_movie_list_tab"
+        tools:layout="@layout/fragment_movie_list_tab" >
+        <action
+            android:id="@+id/action_movieListTabFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/serialsListTabFragment"
+        android:name="com.easyprog.android.moviemate.fragments.serials.SerialsListTabFragment"
+        android:label="fragment_serials_list_tab"
+        tools:layout="@layout/fragment_serials_list_tab" >
+        <action
+            android:id="@+id/action_serialsListTabFragment_to_movieInfoFragment"
+            app:destination="@id/movieInfoFragment" />
     </fragment>
 </navigation>

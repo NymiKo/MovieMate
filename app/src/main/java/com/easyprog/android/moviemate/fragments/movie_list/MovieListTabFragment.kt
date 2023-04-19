@@ -29,7 +29,7 @@ class MovieListTabFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getMovieList()
+        viewModel.getMovieList(FILM)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class MovieListTabFragment :
 
     private fun setupButtonRepeat() {
         binding.buttonRepeat.setOnClickListener {
-            viewModel.getMovieList()
+            viewModel.getMovieList(FILM)
         }
     }
 
@@ -92,5 +92,9 @@ class MovieListTabFragment :
 
     private fun hideButtonRepeat() {
         binding.buttonRepeat.visibility = View.GONE
+    }
+
+    companion object {
+        private const val FILM = "Film"
     }
 }
