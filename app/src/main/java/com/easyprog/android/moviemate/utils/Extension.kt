@@ -2,27 +2,23 @@ package com.easyprog.android.moviemate.utils
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bumptech.glide.Glide
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.activity.MainActivity
@@ -47,7 +43,7 @@ fun <T> ImageView.loadImage(image: T) {
     Glide.with(this).load(image).fitCenter().centerCrop().into(this)
 }
 
-fun <T> ImageView.loadImageCollapsingToolbar(image: T) {
+fun <T> ImageView.loadImageWithoutTransformations(image: T) {
     Glide.with(this).load(image).into(this)
 }
 
@@ -88,5 +84,14 @@ fun String.fromHtmlToString(): Spanned {
         Html.fromHtml(this, HtmlCompat.FROM_HTML_MODE_LEGACY)
     } else {
         Html.fromHtml(this)
+    }
+}
+
+inline fun ViewPager2.onPageCallback(crossinline func:(position: Int) -> Unit) {
+    object : OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            func(position)
+        }
     }
 }

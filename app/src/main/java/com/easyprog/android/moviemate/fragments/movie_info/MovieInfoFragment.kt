@@ -54,7 +54,7 @@ class MovieInfoFragment :
                     val movie = result.data[0]
                     binding.collapsingToolbar.title = movie.name
                     binding.textExpandedDescription.text = movie.description
-                    binding.imageMovieAvatar.loadImageCollapsingToolbar(movie.image)
+                    binding.imageMovieAvatar.loadImageWithoutTransformations(movie.image)
                     binding.textYearProduction.text = getStringFormat(
                         R.string.year_production,
                         movie.year_production
