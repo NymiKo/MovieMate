@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.main_tab.MainTabFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_carousel_movie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Main" />
+        android:layout_height="200dp"
+        android:layout_marginTop="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_carousel_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/view_pager_carousel_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabGravity="center"
+        app:tabBackground="@drawable/carousel_marker"
+        app:tabIndicator="@drawable/carousel_marker"
+        app:tabIndicatorColor="@color/light_green"
+        app:tabIndicatorHeight="10dp"
+        app:tabMaxWidth="10dp"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@color/black" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

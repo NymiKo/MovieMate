@@ -33,6 +33,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         binding.viewPager.apply {
             adapter = PagerFragmentAdapter(requireActivity())
             offscreenPageLimit = 3
+            isUserInputEnabled = false
         }
     }
 
