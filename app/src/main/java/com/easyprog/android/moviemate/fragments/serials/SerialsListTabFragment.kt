@@ -22,7 +22,7 @@ class SerialsListTabFragment :
     private val viewModel: SerialsListViewModel by viewModels()
     private val mAdapter = MovieListAdapter(object : BaseActionListener {
         override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundleOf("idMovie" to idMovie))
+            navigateTo(R.id.movieInfoFragment, bundleOf(ID_MOVIE to idMovie))
         }
     })
 
@@ -77,5 +77,6 @@ class SerialsListTabFragment :
 
     companion object {
         private const val SERIAL = "Serial"
+        private const val ID_MOVIE = "idMovie"
     }
 }

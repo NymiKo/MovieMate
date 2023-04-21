@@ -21,6 +21,9 @@ class MainTabViewModel @Inject constructor(
     private val _movieList = MutableLiveData<Result<List<Movie>>>()
     val movieList: LiveData<Result<List<Movie>>> = _movieList
 
+    private val _newMovieList = MutableLiveData<Result<List<Movie>>>()
+    val newMovieList: LiveData<Result<List<Movie>>> = _newMovieList
+
     fun getCarouselMovieList() {
         viewModelScope.launch(dispatcher.io()) {
             if (_movieList.value == null || _movieList.value != emptyList<Movie>()) {

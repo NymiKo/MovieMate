@@ -21,7 +21,7 @@ class MovieListTabFragment :
 
     private var mAdapter = MovieListAdapter(object : BaseActionListener {
         override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundle = bundleOf("idMovie" to idMovie))
+            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
         }
     })
 
@@ -96,5 +96,6 @@ class MovieListTabFragment :
 
     companion object {
         private const val FILM = "Film"
+        private const val ID_MOVIE = "idMovie"
     }
 }

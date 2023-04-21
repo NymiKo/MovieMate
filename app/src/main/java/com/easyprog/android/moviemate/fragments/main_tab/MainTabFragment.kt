@@ -5,9 +5,12 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.BaseActionListener
 import com.easyprog.android.moviemate.adapters.carousel_movie.CarouselMovieAdapter
+import com.easyprog.android.moviemate.adapters.new_movie.NewMovieAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentMainTabBinding
@@ -25,9 +28,16 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
 
     private val mAdapterCarouselMovie = CarouselMovieAdapter(object : BaseActionListener{
         override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundle = bundleOf("idMovie" to idMovie))
+            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
         }
     })
+
+    private val mAdapterNewMovie = NewMovieAdapter(object : BaseActionListener{
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
+        }
+    })
+
     private val viewModel: MainTabViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +48,13 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getCarouselMovieList()
+        getNewMovieList()
         setupView()
     }
 
     private fun setupView() {
         setupMovieCarousel()
+        setupNewMovieRecyclerView()
     }
 
     private fun setupMovieCarousel() {
@@ -78,12 +90,40 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
 
                 }
                 is Result.ERROR -> {
-                    showSnackBar(R.string.error_message)
+
                 }
                 is Result.SUCCESS -> {
                     mAdapterCarouselMovie.movieList = result.data
                 }
             }
         }
+    }
+
+    private fun setupNewMovieRecyclerView() {
+        binding.recyclerViewNewMovies.apply {
+            adapter = mAdapterNewMovie
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun getNewMovieList() {
+        viewModel.newMovieList.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.LOADING -> {
+
+                }
+                is Result.ERROR -> {
+
+                }
+                is Result.SUCCESS -> {
+                    mAdapterNewMovie.movieList = result.data
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val ID_MOVIE = "idMovie"
     }
 }
