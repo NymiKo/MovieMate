@@ -43,6 +43,7 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getCarouselMovieList()
+        viewModel.getNewMovieList()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

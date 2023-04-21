@@ -10,4 +10,5 @@ class MainTabRepositoryImpl @Inject constructor(
     private val firebaseSource: FirebaseSource
 ): MainTabRepository {
     override suspend fun getCarouselMovieList(): Result<List<Movie>> = firebaseSource.getCarouselMovieList()
+    override suspend fun getNewMovieList(): Result<List<Movie>> = firebaseSource.getNewMovieList()
 }

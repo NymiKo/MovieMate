@@ -34,4 +34,14 @@ class MainTabViewModel @Inject constructor(
         }
     }
 
+    fun getNewMovieList() {
+        viewModelScope.launch(dispatcher.io()) {
+            if (_newMovieList.value == null || _newMovieList.value != emptyList<Movie>()) {
+                _newMovieList.postValue(Result.LOADING)
+                val movieList = repository.getNewMovieList()
+                _newMovieList.postValue(movieList)
+            }
+        }
+    }
+
 }

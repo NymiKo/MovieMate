@@ -31,6 +31,7 @@ class NewMovieAdapter(
     override fun onBindViewHolder(holder: NewMovieViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
+            root.tag = movie.id
             imageMovieAvatar.loadImage(movie.image)
             textMovieName.text = movie.name
         }

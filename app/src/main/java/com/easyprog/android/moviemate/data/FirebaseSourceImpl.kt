@@ -14,6 +14,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         private const val COLLECTION_MOVIES = "Movies"
         private const val COLLECTION_RECOMMENDED_MOVIES = "recommended_movies"
         private const val COLLECTION_CAROUSEL = "carousel"
+        private const val COLLECTION_NEW_MOVIE = "new_movie"
         private const val ID = "id"
         private const val NAME_FOR_SEARCH = "name_for_search"
         private const val NAME = "name"
@@ -60,6 +61,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     override suspend fun getCarouselMovieList(): Result<List<Movie>> {
         val snapshot = getFirestore().collection(COLLECTION_CAROUSEL).get().await()
+        return getResult(snapshot)
+    }
+
+    override suspend fun getNewMovieList(): Result<List<Movie>> {
+        val snapshot = getFirestore().collection(COLLECTION_NEW_MOVIE).get().await()
         return getResult(snapshot)
     }
 
