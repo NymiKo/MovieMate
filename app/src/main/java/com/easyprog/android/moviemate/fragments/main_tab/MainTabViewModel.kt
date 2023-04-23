@@ -10,6 +10,7 @@ import com.easyprog.android.moviemate.domain.MainTabRepository
 import com.easyprog.android.moviemate.fragments.base.DispatchersList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +29,7 @@ class MainTabViewModel @Inject constructor(
     val weekendMovieList: LiveData<Result<List<Movie>>> = _weekendMovieList
 
     fun initViewModel() {
-        viewModelScope.launch(dispatcher.io()) {
+        viewModelScope.launch {
             getMovieList(_movieList) { repository.getCarouselMovieList() }
             getMovieList(_newMovieList) { repository.getNewMovieList() }
             getMovieList(_weekendMovieList) { repository.getWeekendMovieList() }
@@ -40,9 +41,9 @@ class MainTabViewModel @Inject constructor(
         getList: suspend () -> Result<List<Movie>>
     ) {
         if (liveData.value == null || liveData.value != emptyList<Movie>()) {
-            liveData.postValue(Result.LOADING)
-            val movieList = getList()
-            liveData.postValue(movieList)
+            liveData.value = Result.LOADING
+            val movieList = withContext(dispatcher.io()) { getList() }
+            liveData.value = movieList
         }
     }
 

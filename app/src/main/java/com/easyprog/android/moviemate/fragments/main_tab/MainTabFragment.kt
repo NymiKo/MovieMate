@@ -27,10 +27,9 @@ import kotlinx.coroutines.isActive
 class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBinding::inflate) {
 
     private val mAdapterCarouselMovie = CarouselMovieAdapter(onClickItem())
-
     private val mAdapterWeekendMovie = NewMovieAdapter(onClickItem())
-
     private val mAdapterNewMovie = NewMovieAdapter(onClickItem())
+    private val mAdapterFascinatingSeries = NewMovieAdapter(onClickItem())
 
     private val viewModel: MainTabViewModel by viewModels()
 
@@ -44,13 +43,15 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
         getCarouselMovieList()
         getNewMovieList()
         getWeekendMovieList()
-        setupWeekendMovieRecyclerView()
+        getFascinatingSeriesList()
         setupView()
     }
 
     private fun setupView() {
         setupMovieCarousel()
         setupNewMovieRecyclerView()
+        setupWeekendMovieRecyclerView()
+        setupFascinatingSeriesRecyclerView()
     }
 
     private fun setupMovieCarousel() {
@@ -138,6 +139,30 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
                 }
                 is Result.SUCCESS -> {
                     mAdapterWeekendMovie.movieList = result.data
+                }
+            }
+        }
+    }
+
+    private fun setupFascinatingSeriesRecyclerView() {
+        binding.recyclerViewFascinatingSeries.apply {
+            adapter = mAdapterWeekendMovie
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun getFascinatingSeriesList() {
+        viewModel.fascinatingSeriesList.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.LOADING -> {
+
+                }
+                is Result.ERROR -> {
+
+                }
+                is Result.SUCCESS -> {
+                    mAdapterFascinatingSeries.movieList = result.data
                 }
             }
         }

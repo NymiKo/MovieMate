@@ -93,5 +93,32 @@
             app:layout_constraintTop_toBottomOf="@+id/text_weekend_movies"
             tools:listitem="@layout/item_recommended_movie" />
 
+        <TextView
+            android:id="@+id/text_fascinating_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_medium"
+            android:text="@string/series_from_which_impossible_break"
+            android:textColor="?attr/colorSecondaryVariant"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_weekend_movies" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_fascinating_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_weekend_movies"
+            tools:listitem="@layout/item_recommended_movie" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
