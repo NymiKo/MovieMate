@@ -28,4 +28,5 @@
     <string name="films">Фильмы</string>
     <string name="serials">Сериалы</string>
     <string name="new_movies">Новинки</string>
+    <string name="weekend_movies">Что смотреть в выходные</string>
 </resources>

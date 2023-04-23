@@ -32,6 +32,12 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
         }
     })
 
+    private val mAdapterWeekendMovie = NewMovieAdapter(object : BaseActionListener{
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
+        }
+    })
+
     private val mAdapterNewMovie = NewMovieAdapter(object : BaseActionListener{
         override fun onMovieClick(idMovie: String) {
             navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
@@ -50,6 +56,8 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
         super.onViewCreated(view, savedInstanceState)
         getCarouselMovieList()
         getNewMovieList()
+        getWeekendMovieList()
+        setupWeekendMovieRecyclerView()
         setupView()
     }
 
@@ -119,6 +127,30 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
                 }
                 is Result.SUCCESS -> {
                     mAdapterNewMovie.movieList = result.data
+                }
+            }
+        }
+    }
+
+    private fun setupWeekendMovieRecyclerView() {
+        binding.recyclerViewWeekendMovies.apply {
+            adapter = mAdapterWeekendMovie
+            layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun getWeekendMovieList() {
+        viewModel.newMovieList.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.LOADING -> {
+
+                }
+                is Result.ERROR -> {
+
+                }
+                is Result.SUCCESS -> {
+                    mAdapterWeekendMovie.movieList = result.data
                 }
             }
         }

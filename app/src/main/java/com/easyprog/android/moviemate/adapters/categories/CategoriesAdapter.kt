@@ -24,8 +24,10 @@ class CategoriesAdapter(
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val category = categoriesList[position]
-        holder.binding.buttonCategory.tag = category
-        holder.binding.buttonCategory.text = category
+        holder.binding.buttonCategory.apply {
+            tag = category
+            text = category
+        }
     }
 
     override fun getItemCount(): Int = categoriesList.size

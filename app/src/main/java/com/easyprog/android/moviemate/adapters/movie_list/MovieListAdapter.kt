@@ -7,30 +7,16 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.BaseActionListener
+import com.easyprog.android.moviemate.adapters.BaseAdapter
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MovieListAdapter(
     private val actionListener: BaseActionListener
-) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>(), View.OnClickListener {
+) : BaseAdapter<ItemMovieListBinding>(ItemMovieListBinding::inflate) {
 
-    var movieList: List<Movie> = emptyList()
-        set(newValue) {
-            field = newValue
-            notifyItemRangeInserted(0, newValue.size)
-        }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieListViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemMovieListBinding.inflate(inflater, parent, false)
-
-        binding.root.setOnClickListener(this)
-
-        return MovieListViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val movie = movieList[position]
         holder.binding.apply {
             layoutMovieItem.tag = movie.id
@@ -39,15 +25,10 @@ class MovieListAdapter(
             textRatingMovie.apply {
                 text = movie.rating.toString()
                 background =
-                    ContextCompat.getDrawable(root.context, setColorByRating(movie.rating.toInt()))
+                    ContextCompat.getDrawable(root.context, setColorByRating(movie.rating))
             }
         }
     }
-
-    override fun getItemCount(): Int = movieList.size
-
-    class MovieListViewHolder(val binding: ItemMovieListBinding) :
-        RecyclerView.ViewHolder(binding.root)
 
     private fun setColorByRating(rating: Int): Int {
         return when (rating) {
