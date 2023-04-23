@@ -26,30 +26,17 @@ import kotlinx.coroutines.isActive
 @AndroidEntryPoint
 class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBinding::inflate) {
 
-    private val mAdapterCarouselMovie = CarouselMovieAdapter(object : BaseActionListener{
-        override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
-        }
-    })
+    private val mAdapterCarouselMovie = CarouselMovieAdapter(onClickItem())
 
-    private val mAdapterWeekendMovie = NewMovieAdapter(object : BaseActionListener{
-        override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
-        }
-    })
+    private val mAdapterWeekendMovie = NewMovieAdapter(onClickItem())
 
-    private val mAdapterNewMovie = NewMovieAdapter(object : BaseActionListener{
-        override fun onMovieClick(idMovie: String) {
-            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
-        }
-    })
+    private val mAdapterNewMovie = NewMovieAdapter(onClickItem())
 
     private val viewModel: MainTabViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getCarouselMovieList()
-        viewModel.getNewMovieList()
+        viewModel.initViewModel()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -141,7 +128,7 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
     }
 
     private fun getWeekendMovieList() {
-        viewModel.newMovieList.observe(viewLifecycleOwner) { result ->
+        viewModel.weekendMovieList.observe(viewLifecycleOwner) { result ->
             when (result) {
                 Result.LOADING -> {
 
@@ -153,6 +140,12 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
                     mAdapterWeekendMovie.movieList = result.data
                 }
             }
+        }
+    }
+
+    private fun onClickItem() = object : BaseActionListener{
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
         }
     }
 

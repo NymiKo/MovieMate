@@ -24,23 +24,25 @@ class MainTabViewModel @Inject constructor(
     private val _newMovieList = MutableLiveData<Result<List<Movie>>>()
     val newMovieList: LiveData<Result<List<Movie>>> = _newMovieList
 
-    fun getCarouselMovieList() {
+    private val _weekendMovieList = MutableLiveData<Result<List<Movie>>>()
+    val weekendMovieList: LiveData<Result<List<Movie>>> = _weekendMovieList
+
+    fun initViewModel() {
         viewModelScope.launch(dispatcher.io()) {
-            if (_movieList.value == null || _movieList.value != emptyList<Movie>()) {
-                _movieList.postValue(Result.LOADING)
-                val movieList = repository.getCarouselMovieList()
-                _movieList.postValue(movieList)
-            }
+            getMovieList(_movieList) { repository.getCarouselMovieList() }
+            getMovieList(_newMovieList) { repository.getNewMovieList() }
+            getMovieList(_weekendMovieList) { repository.getWeekendMovieList() }
         }
     }
 
-    fun getNewMovieList() {
-        viewModelScope.launch(dispatcher.io()) {
-            if (_newMovieList.value == null || _newMovieList.value != emptyList<Movie>()) {
-                _newMovieList.postValue(Result.LOADING)
-                val movieList = repository.getNewMovieList()
-                _newMovieList.postValue(movieList)
-            }
+    private suspend fun getMovieList(
+        liveData: MutableLiveData<Result<List<Movie>>>,
+        getList: suspend () -> Result<List<Movie>>
+    ) {
+        if (liveData.value == null || liveData.value != emptyList<Movie>()) {
+            liveData.postValue(Result.LOADING)
+            val movieList = getList()
+            liveData.postValue(movieList)
         }
     }
 

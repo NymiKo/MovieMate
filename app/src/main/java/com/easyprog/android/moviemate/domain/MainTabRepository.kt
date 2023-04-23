@@ -6,4 +6,5 @@ import com.easyprog.android.moviemate.data.Result
 interface MainTabRepository {
     suspend fun getCarouselMovieList(): Result<List<Movie>>
     suspend fun getNewMovieList(): Result<List<Movie>>
+    suspend fun getWeekendMovieList(): Result<List<Movie>>
 }
