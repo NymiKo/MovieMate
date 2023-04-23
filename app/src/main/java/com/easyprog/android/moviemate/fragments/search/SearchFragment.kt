@@ -218,7 +218,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
     }
 
     private fun setResultToRecommendedMoviesRecyclerView(movieList: List<Movie>) {
-        mAdapterRecommendedMovies.recommendedMoviesList = movieList
+        mAdapterRecommendedMovies.movieList = movieList
     }
 
     private fun setupRecommendedMoviesRecyclerView() {
