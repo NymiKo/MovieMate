@@ -12,4 +12,5 @@ class MainTabRepositoryImpl @Inject constructor(
     override suspend fun getCarouselMovieList(): Result<List<Movie>> = firebaseSource.getCarouselMovieList()
     override suspend fun getNewMovieList(): Result<List<Movie>> = firebaseSource.getNewMovieList()
     override suspend fun getWeekendMovieList(): Result<List<Movie>> = firebaseSource.getWeekendMovieList()
+    override suspend fun getFascinatingSeriesList(): Result<List<Movie>> = firebaseSource.getFascinatingSeriesList()
 }

@@ -28,11 +28,15 @@ class MainTabViewModel @Inject constructor(
     private val _weekendMovieList = MutableLiveData<Result<List<Movie>>>()
     val weekendMovieList: LiveData<Result<List<Movie>>> = _weekendMovieList
 
+    private val _fascinatingSeriesList = MutableLiveData<Result<List<Movie>>>()
+    val fascinatingSeriesList: LiveData<Result<List<Movie>>> = _fascinatingSeriesList
+
     fun initViewModel() {
         viewModelScope.launch {
             getMovieList(_movieList) { repository.getCarouselMovieList() }
             getMovieList(_newMovieList) { repository.getNewMovieList() }
             getMovieList(_weekendMovieList) { repository.getWeekendMovieList() }
+            getMovieList(_fascinatingSeriesList) { repository.getFascinatingSeriesList() }
         }
     }
 

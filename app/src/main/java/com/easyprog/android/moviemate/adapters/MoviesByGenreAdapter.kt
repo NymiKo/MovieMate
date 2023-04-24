@@ -1,12 +1,12 @@
 package com.easyprog.android.moviemate.adapters
 
 import android.view.View
-import com.easyprog.android.moviemate.databinding.ItemCategoryMovieBinding
+import com.easyprog.android.moviemate.databinding.ItemGenreMovieBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
-class MoviesByCategoryAdapter(
+class MoviesByGenreAdapter(
     private val actionListener: BaseActionListener
-) : BaseAdapter<ItemCategoryMovieBinding>(ItemCategoryMovieBinding::inflate) {
+) : BaseAdapter<ItemGenreMovieBinding>(ItemGenreMovieBinding::inflate) {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val movie = movieList[position]

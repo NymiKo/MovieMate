@@ -16,6 +16,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         private const val COLLECTION_CAROUSEL = "carousel"
         private const val COLLECTION_NEW_MOVIE = "new_movie"
         private const val COLLECTION_WEEKEND_MOVIE = "weekend_movies"
+        private const val COLLECTION_FASCINATING_SERIES = "fascinating_series"
         private const val ID = "id"
         private const val NAME_FOR_SEARCH = "name_for_search"
         private const val NAME = "name"
@@ -49,8 +50,8 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return getResult(snapshot)
     }
 
-    override suspend fun getMoviesByCategory(category: String): Result<List<Movie>> {
-        val snapshot = getFirestore().collection(category.lowercase()).orderBy(NAME).get().await()
+    override suspend fun getMoviesByGenre(genre: String): Result<List<Movie>> {
+        val snapshot = getFirestore().collection(genre.lowercase()).orderBy(NAME).get().await()
         return getResult(snapshot)
     }
 
@@ -72,6 +73,11 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
 
     override suspend fun getWeekendMovieList(): Result<List<Movie>> {
         val snapshot = getFirestore().collection(COLLECTION_WEEKEND_MOVIE).get().await()
+        return getResult(snapshot)
+    }
+
+    override suspend fun getFascinatingSeriesList(): Result<List<Movie>> {
+        val snapshot = getFirestore().collection(COLLECTION_FASCINATING_SERIES).get().await()
         return getResult(snapshot)
     }
 

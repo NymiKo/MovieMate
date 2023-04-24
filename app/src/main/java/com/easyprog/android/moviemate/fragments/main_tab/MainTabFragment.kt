@@ -146,7 +146,7 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
 
     private fun setupFascinatingSeriesRecyclerView() {
         binding.recyclerViewFascinatingSeries.apply {
-            adapter = mAdapterWeekendMovie
+            adapter = mAdapterFascinatingSeries
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
             setHasFixedSize(true)
         }

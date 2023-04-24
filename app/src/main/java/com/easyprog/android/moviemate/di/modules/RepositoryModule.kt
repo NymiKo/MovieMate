@@ -22,7 +22,7 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
-    abstract fun provideMoviesByCategoryRepository(moviesByCategoryRepositoryImpl: MoviesByCategoryRepositoryImpl): MoviesByCategoryRepository
+    abstract fun provideMoviesByCategoryRepository(moviesByGenreRepositoryImpl: MoviesByGenreRepositoryImpl): MoviesByGenreRepository
 
     @Singleton
     @Binds

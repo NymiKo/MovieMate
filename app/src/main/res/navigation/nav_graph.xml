@@ -21,7 +21,7 @@
             app:destination="@id/searchResultFragment" />
         <action
             android:id="@+id/action_searchFragment_to_categoryFragment"
-            app:destination="@id/moviesByCategoryFragment"
+            app:destination="@id/moviesByGenreFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
@@ -47,14 +47,14 @@
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" />
     <fragment
-        android:id="@+id/moviesByCategoryFragment"
-        android:name="com.easyprog.android.moviemate.fragments.movies_by_category.MoviesByCategoryFragment"
-        android:label="fragment_movies_by_category"
-        tools:layout="@layout/fragment_movies_by_category" >
+        android:id="@+id/moviesByGenreFragment"
+        android:name="com.easyprog.android.moviemate.fragments.movies_by_genre.MoviesByGenreFragment"
+        android:label="fragment_movies_by_genre"
+        tools:layout="@layout/fragment_movies_by_genre">
         <argument
             android:name="category"
-            app:argType="string"
-            android:defaultValue="Комедия" />
+            android:defaultValue="Комедия"
+            app:argType="string" />
         <action
             android:id="@+id/action_moviesByCategoryFragment_to_movieInfoFragment"
             app:destination="@id/movieInfoFragment" />

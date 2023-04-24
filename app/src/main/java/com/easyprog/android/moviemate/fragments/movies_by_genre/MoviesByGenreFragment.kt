@@ -1,4 +1,4 @@
-package com.easyprog.android.moviemate.fragments.movies_by_category
+package com.easyprog.android.moviemate.fragments.movies_by_genre
 
 import android.os.Bundle
 import android.view.View
@@ -7,26 +7,25 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.BaseActionListener
-import com.easyprog.android.moviemate.adapters.MoviesByCategoryAdapter
+import com.easyprog.android.moviemate.adapters.MoviesByGenreAdapter
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.databinding.FragmentMoviesByCategoryBinding
+import com.easyprog.android.moviemate.databinding.FragmentMoviesByGenreBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
-import com.easyprog.android.moviemate.fragments.movie_info.MovieInfoFragmentArgs
 import com.easyprog.android.moviemate.utils.hideBottomNavView
 import com.easyprog.android.moviemate.utils.navigateTo
 import com.easyprog.android.moviemate.utils.showSnackBar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MoviesByCategoryFragment : BaseFragment<FragmentMoviesByCategoryBinding>(FragmentMoviesByCategoryBinding::inflate) {
+class MoviesByGenreFragment : BaseFragment<FragmentMoviesByGenreBinding>(FragmentMoviesByGenreBinding::inflate) {
 
-    private val mAdapter = MoviesByCategoryAdapter(object : BaseActionListener {
+    private val mAdapter = MoviesByGenreAdapter(object : BaseActionListener {
         override fun onMovieClick(idMovie: String) {
-            navigateTo(MoviesByCategoryFragmentDirections.actionMoviesByCategoryFragmentToMovieInfoFragment(idMovie))
+            navigateTo(MoviesByGenreFragmentDirections.actionMoviesByCategoryFragmentToMovieInfoFragment(idMovie))
         }
     })
-    private val args: MoviesByCategoryFragmentArgs by navArgs()
-    private val viewModel: MoviesByCategoryViewModel by viewModels()
+    private val args: MoviesByGenreFragmentArgs by navArgs()
+    private val viewModel: MoviesByGenreViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

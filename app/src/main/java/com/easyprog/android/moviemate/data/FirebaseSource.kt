@@ -7,10 +7,11 @@ interface FirebaseSource {
     suspend fun getMovieList(catalog: String): Result<List<Movie>>
     suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>>
     suspend fun getRecommendedMovies(): Result<List<Movie>>
-    suspend fun getMoviesByCategory(category: String): Result<List<Movie>>
+    suspend fun getMoviesByGenre(genre: String): Result<List<Movie>>
     suspend fun getMovieInfo(idMovie: String): Result<List<Movie>>
     suspend fun getCarouselMovieList(): Result<List<Movie>>
     suspend fun getNewMovieList(): Result<List<Movie>>
     suspend fun getWeekendMovieList(): Result<List<Movie>>
+    suspend fun getFascinatingSeriesList(): Result<List<Movie>>
 
 }
