@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.categories.CategoriesAdapter
-import com.easyprog.android.moviemate.adapters.RecommendedMoviesAdapter
-import com.easyprog.android.moviemate.adapters.SearchMovieAdapter
+import com.easyprog.android.moviemate.adapters.search_movie_adapter.SearchMovieAdapter
 import com.easyprog.android.moviemate.adapters.categories.CategoriesActionListener
+import com.easyprog.android.moviemate.adapters.movies_by_category.MoviesByCategoryAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
@@ -30,16 +30,8 @@ import kotlinx.coroutines.flow.onEach
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
 
     private val viewModel: SearchViewModel by viewModels()
-    private var mAdapterSearchMovie = SearchMovieAdapter(object : BaseActionListener {
-        override fun onMovieClick(idMovie: String) {
-            navigateTo(SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(idMovie))
-        }
-    })
-    private var mAdapterRecommendedMovies = RecommendedMoviesAdapter(object : BaseActionListener {
-        override fun onMovieClick(idMovie: String) {
-            navigateTo(SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(idMovie))
-        }
-    })
+    private var mAdapterSearchMovie = SearchMovieAdapter(onClickItem())
+    private var mAdapterRecommendedMovies = MoviesByCategoryAdapter(onClickItem())
     private var mAdapterCategories = CategoriesAdapter(object : CategoriesActionListener {
         override fun categoryClick(category: String) {
             navigateTo(SearchFragmentDirections.actionSearchFragmentToCategoryFragment(category))
@@ -233,6 +225,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         binding.recyclerViewCategories.apply {
             layoutManager = StaggeredGridLayoutManager(3, RecyclerView.HORIZONTAL)
             adapter = mAdapterCategories
+        }
+    }
+
+    private fun onClickItem() = object : BaseActionListener {
+        override fun onMovieClick(idMovie: String) {
+            navigateTo(SearchFragmentDirections.actionSearchFragmentToMovieInfoFragment(idMovie))
         }
     }
 

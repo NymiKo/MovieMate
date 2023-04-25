@@ -6,8 +6,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.BaseActionListener
-import com.easyprog.android.moviemate.adapters.MoviesByGenreAdapter
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
+import com.easyprog.android.moviemate.adapters.movie_by_genre.MoviesByGenreAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.databinding.FragmentMoviesByGenreBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment

@@ -8,16 +8,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.carousel_movie.CarouselMovieAdapter
-import com.easyprog.android.moviemate.adapters.new_movie.NewMovieAdapter
+import com.easyprog.android.moviemate.adapters.movies_by_category.MoviesByCategoryAdapter
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.FragmentMainTabBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.utils.navigateTo
 import com.easyprog.android.moviemate.utils.onPageCallback
-import com.easyprog.android.moviemate.utils.showSnackBar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -27,9 +25,9 @@ import kotlinx.coroutines.isActive
 class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBinding::inflate) {
 
     private val mAdapterCarouselMovie = CarouselMovieAdapter(onClickItem())
-    private val mAdapterWeekendMovie = NewMovieAdapter(onClickItem())
-    private val mAdapterNewMovie = NewMovieAdapter(onClickItem())
-    private val mAdapterFascinatingSeries = NewMovieAdapter(onClickItem())
+    private val mAdapterWeekendMovie = MoviesByCategoryAdapter(onClickItem())
+    private val mAdapterNewMovie = MoviesByCategoryAdapter(onClickItem())
+    private val mAdapterFascinatingSeries = MoviesByCategoryAdapter(onClickItem())
 
     private val viewModel: MainTabViewModel by viewModels()
 
@@ -56,7 +54,10 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
 
     private fun setupMovieCarousel() {
         binding.viewPagerCarouselMovie.adapter = mAdapterCarouselMovie
-        TabLayoutMediator(binding.tabLayoutCarouselMarker, binding.viewPagerCarouselMovie) { tab, position ->
+        TabLayoutMediator(
+            binding.tabLayoutCarouselMarker,
+            binding.viewPagerCarouselMovie
+        ) { tab, position ->
             tab.text = ""
         }.attach()
 
@@ -168,7 +169,7 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
         }
     }
 
-    private fun onClickItem() = object : BaseActionListener{
+    private fun onClickItem() = object : BaseActionListener {
         override fun onMovieClick(idMovie: String) {
             navigateTo(R.id.movieInfoFragment, bundle = bundleOf(ID_MOVIE to idMovie))
         }

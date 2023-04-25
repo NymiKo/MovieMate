@@ -1,4 +1,4 @@
-package com.easyprog.android.moviemate.adapters
+package com.easyprog.android.moviemate.adapters.search_movie_adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.SearchMovieAdapter.SearchMovieViewHolder
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
+import com.easyprog.android.moviemate.adapters.search_movie_adapter.SearchMovieAdapter.SearchMovieViewHolder
 import com.easyprog.android.moviemate.data.model.Movie
 import com.easyprog.android.moviemate.databinding.ItemSearchMovieBinding
 import com.easyprog.android.moviemate.utils.loadImage

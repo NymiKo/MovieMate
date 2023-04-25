@@ -1,14 +1,10 @@
 package com.easyprog.android.moviemate.adapters.movie_list
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.BaseActionListener
-import com.easyprog.android.moviemate.adapters.BaseAdapter
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseAdapter
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
 

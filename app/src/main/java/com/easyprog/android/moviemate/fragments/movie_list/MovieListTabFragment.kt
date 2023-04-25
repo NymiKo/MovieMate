@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.easyprog.android.moviemate.R
-import com.easyprog.android.moviemate.adapters.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.movie_list.MovieListAdapter
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.databinding.FragmentMovieListTabBinding

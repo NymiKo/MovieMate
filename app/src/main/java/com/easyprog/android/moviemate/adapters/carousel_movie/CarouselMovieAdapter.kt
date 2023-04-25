@@ -1,8 +1,8 @@
 package com.easyprog.android.moviemate.adapters.carousel_movie
 
 import android.view.View
-import com.easyprog.android.moviemate.adapters.BaseActionListener
-import com.easyprog.android.moviemate.adapters.BaseAdapter
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseAdapter
 import com.easyprog.android.moviemate.databinding.ItemCarouselMovieBinding
 import com.easyprog.android.moviemate.utils.loadImageWithoutTransformations
 

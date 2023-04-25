@@ -1,12 +1,14 @@
-package com.easyprog.android.moviemate.adapters
+package com.easyprog.android.moviemate.adapters.movies_by_category
 
 import android.view.View
-import com.easyprog.android.moviemate.databinding.ItemRecommendedMovieBinding
+import com.easyprog.android.moviemate.adapters.base.BaseActionListener
+import com.easyprog.android.moviemate.adapters.base.BaseAdapter
+import com.easyprog.android.moviemate.databinding.ItemMoviesByCategoryBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
-class RecommendedMoviesAdapter(
+class MoviesByCategoryAdapter(
     private val actionListener: BaseActionListener
-) : BaseAdapter<ItemRecommendedMovieBinding>(ItemRecommendedMovieBinding::inflate) {
+) : BaseAdapter<ItemMoviesByCategoryBinding>(ItemMoviesByCategoryBinding::inflate) {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val movie = movieList[position]
@@ -21,4 +23,5 @@ class RecommendedMoviesAdapter(
         val idMovie = v?.tag.toString()
         actionListener.onMovieClick(idMovie)
     }
+
 }
