@@ -3,12 +3,13 @@ package com.easyprog.android.moviemate.adapters.carousel_movie
 import android.view.View
 import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.base.BaseAdapter
+import com.easyprog.android.moviemate.data.model.MovieCarousel
 import com.easyprog.android.moviemate.databinding.ItemCarouselMovieBinding
 import com.easyprog.android.moviemate.utils.loadImageWithoutTransformations
 
 class CarouselMovieAdapter(
     private val actionListener: BaseActionListener
-) : BaseAdapter<ItemCarouselMovieBinding>(ItemCarouselMovieBinding::inflate) {
+) : BaseAdapter<ItemCarouselMovieBinding, MovieCarousel>(ItemCarouselMovieBinding::inflate) {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val movie = movieList[position]

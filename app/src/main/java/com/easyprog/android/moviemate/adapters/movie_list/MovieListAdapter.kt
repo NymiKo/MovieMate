@@ -5,12 +5,13 @@ import androidx.core.content.ContextCompat
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.base.BaseAdapter
+import com.easyprog.android.moviemate.data.model.MovieFullInfo
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
 
 class MovieListAdapter(
     private val actionListener: BaseActionListener
-) : BaseAdapter<ItemMovieListBinding>(ItemMovieListBinding::inflate) {
+) : BaseAdapter<ItemMovieListBinding, MovieFullInfo>(ItemMovieListBinding::inflate) {
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val movie = movieList[position]

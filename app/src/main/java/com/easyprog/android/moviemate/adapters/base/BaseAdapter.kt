@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.easyprog.android.moviemate.data.model.MovieMainInfo
 
-abstract class BaseAdapter<T : ViewBinding>(private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> T) :
-    RecyclerView.Adapter<BaseAdapter<T>.BaseViewHolder>(), View.OnClickListener {
+abstract class BaseAdapter<T : ViewBinding, M: Any>(private val bindingInflater: (LayoutInflater, ViewGroup, Boolean) -> T) :
+    RecyclerView.Adapter<BaseAdapter<T, M>.BaseViewHolder>(), View.OnClickListener {
 
-    var movieList: List<MovieMainInfo> = emptyList()
+    var movieList: List<M> = emptyList()
         set(newValue) {
             field = newValue
             notifyItemRangeInserted(0, newValue.size)

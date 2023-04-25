@@ -82,7 +82,7 @@ class MainTabFragment : BaseFragment<FragmentMainTabBinding>(FragmentMainTabBind
     }
 
     private fun getCarouselMovieList() {
-        viewModel.movieList.observe(viewLifecycleOwner) { result ->
+        viewModel.carouselMovieList.observe(viewLifecycleOwner) { result ->
             when (result) {
                 Result.LOADING -> {
 

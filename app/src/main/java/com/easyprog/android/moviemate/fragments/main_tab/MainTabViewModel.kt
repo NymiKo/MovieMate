@@ -41,9 +41,9 @@ class MainTabViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getMovieList(
-        liveData: MutableLiveData<Result<List<MovieMainInfo>>>,
-        getList: suspend () -> Result<List<MovieMainInfo>>
+    private suspend inline fun <T: Any> getMovieList(
+        liveData: MutableLiveData<Result<T>>,
+        crossinline getList: suspend () -> Result<T>
     ) {
         if (liveData.value == null || liveData.value != emptyList<MovieMainInfo>()) {
             liveData.value = Result.LOADING
