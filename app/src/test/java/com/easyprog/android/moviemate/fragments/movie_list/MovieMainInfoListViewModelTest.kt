@@ -3,19 +3,15 @@ package com.easyprog.android.moviemate.fragments.movie_list
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.easyprog.android.moviemate.CoroutineTestRule
 import com.easyprog.android.moviemate.FakeDispatcherList
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.easyprog.android.moviemate.data.Result
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.advanceUntilIdle
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class MovieListViewModelTest {
+class MovieMainInfoListViewModelTest {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -24,11 +20,11 @@ class MovieListViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     private lateinit var viewModel: MovieListViewModel
-    private lateinit var repository: FakeMovieListRepository
+    private lateinit var repository: FakeMovieListListRepository
 
     @Before
     fun setup() {
-        repository = FakeMovieListRepository()
+        repository = FakeMovieListListRepository()
         viewModel = MovieListViewModel(repository, FakeDispatcherList())
     }
 
@@ -42,8 +38,8 @@ class MovieListViewModelTest {
     @Test
     fun `get a list of movies and check the result for success`() = runTest {
         val expectedMovieList = listOf(
-            Movie(0, "Милый дом"),
-            Movie(1, "Завтра")
+            MovieMainInfo(0, "Милый дом"),
+            MovieMainInfo(1, "Завтра")
         )
         repository.setMovieList(expectedMovieList)
         viewModel.getMovieList()

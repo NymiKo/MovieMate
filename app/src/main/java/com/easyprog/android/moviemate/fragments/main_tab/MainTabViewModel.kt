@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieCarousel
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.easyprog.android.moviemate.domain.MainTabRepository
 import com.easyprog.android.moviemate.fragments.base.DispatchersList
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,21 +20,21 @@ class MainTabViewModel @Inject constructor(
     private val dispatcher: DispatchersList
 ): ViewModel() {
 
-    private val _movieList = MutableLiveData<Result<List<Movie>>>()
-    val movieList: LiveData<Result<List<Movie>>> = _movieList
+    private val _carouselMovieList = MutableLiveData<Result<List<MovieCarousel>>>()
+    val carouselMovieList: LiveData<Result<List<MovieCarousel>>> = _carouselMovieList
 
-    private val _newMovieList = MutableLiveData<Result<List<Movie>>>()
-    val newMovieList: LiveData<Result<List<Movie>>> = _newMovieList
+    private val _newMovieList = MutableLiveData<Result<List<MovieMainInfo>>>()
+    val newMovieList: LiveData<Result<List<MovieMainInfo>>> = _newMovieList
 
-    private val _weekendMovieList = MutableLiveData<Result<List<Movie>>>()
-    val weekendMovieList: LiveData<Result<List<Movie>>> = _weekendMovieList
+    private val _weekendMovieList = MutableLiveData<Result<List<MovieMainInfo>>>()
+    val weekendMovieList: LiveData<Result<List<MovieMainInfo>>> = _weekendMovieList
 
-    private val _fascinatingSeriesList = MutableLiveData<Result<List<Movie>>>()
-    val fascinatingSeriesList: LiveData<Result<List<Movie>>> = _fascinatingSeriesList
+    private val _fascinatingSeriesList = MutableLiveData<Result<List<MovieMainInfo>>>()
+    val fascinatingSeriesList: LiveData<Result<List<MovieMainInfo>>> = _fascinatingSeriesList
 
     fun initViewModel() {
         viewModelScope.launch {
-            getMovieList(_movieList) { repository.getCarouselMovieList() }
+            getMovieList(_carouselMovieList) { repository.getCarouselMovieList() }
             getMovieList(_newMovieList) { repository.getNewMovieList() }
             getMovieList(_weekendMovieList) { repository.getWeekendMovieList() }
             getMovieList(_fascinatingSeriesList) { repository.getFascinatingSeriesList() }
@@ -41,10 +42,10 @@ class MainTabViewModel @Inject constructor(
     }
 
     private suspend fun getMovieList(
-        liveData: MutableLiveData<Result<List<Movie>>>,
-        getList: suspend () -> Result<List<Movie>>
+        liveData: MutableLiveData<Result<List<MovieMainInfo>>>,
+        getList: suspend () -> Result<List<MovieMainInfo>>
     ) {
-        if (liveData.value == null || liveData.value != emptyList<Movie>()) {
+        if (liveData.value == null || liveData.value != emptyList<MovieMainInfo>()) {
             liveData.value = Result.LOADING
             val movieList = withContext(dispatcher.io()) { getList() }
             liveData.value = movieList

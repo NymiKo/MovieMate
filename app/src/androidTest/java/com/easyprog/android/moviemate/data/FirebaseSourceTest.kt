@@ -1,7 +1,7 @@
 package com.easyprog.android.moviemate.data
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before
@@ -21,8 +21,8 @@ class FirebaseSourceTest {
     @Test
     fun checkingFirebaseResult() = runBlocking {
         val actualList = firestore.getMovieList()
-        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
-        val result = if (actualList is Result.SUCCESS<List<Movie>>) actualList.data else emptyList()
+        assertTrue(actualList is Result.SUCCESS<List<MovieMainInfo>>)
+        val result = if (actualList is Result.SUCCESS<List<MovieMainInfo>>) actualList.data else emptyList()
         assertNotNull(result)
         assertFalse(result.isEmpty())
     }
@@ -30,8 +30,8 @@ class FirebaseSourceTest {
     @Test
     fun checkingFirebaseResultBySearch() = runBlocking {
         val actualList = firestore.getMovieListBySearch("завтра")
-        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
-        val result = if (actualList is Result.SUCCESS<List<Movie>>) actualList.data else emptyList()
+        assertTrue(actualList is Result.SUCCESS<List<MovieMainInfo>>)
+        val result = if (actualList is Result.SUCCESS<List<MovieMainInfo>>) actualList.data else emptyList()
         assertNotNull(result)
         assertFalse(result.isEmpty())
     }
@@ -39,8 +39,8 @@ class FirebaseSourceTest {
     @Test
     fun checkingFirebaseResultRecommendedMovies() = runBlocking {
         val actualList = firestore.getRecommendedMovies()
-        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
-        val result = if (actualList is Result.SUCCESS<List<Movie>>) actualList.data else emptyList()
+        assertTrue(actualList is Result.SUCCESS<List<MovieMainInfo>>)
+        val result = if (actualList is Result.SUCCESS<List<MovieMainInfo>>) actualList.data else emptyList()
         assertNotNull(result)
         assertFalse(result.isEmpty())
     }
@@ -48,8 +48,8 @@ class FirebaseSourceTest {
     @Test
     fun checkingFirebaseResultMoviesByCategory() = runBlocking {
         val actualList = firestore.getMoviesByCategory("боевик")
-        assertTrue(actualList is Result.SUCCESS<List<Movie>>)
-        val result = if (actualList is Result.SUCCESS<List<Movie>>) actualList.data else emptyList()
+        assertTrue(actualList is Result.SUCCESS<List<MovieMainInfo>>)
+        val result = if (actualList is Result.SUCCESS<List<MovieMainInfo>>) actualList.data else emptyList()
         assertNotNull(result)
         assertFalse(result.isEmpty())
     }

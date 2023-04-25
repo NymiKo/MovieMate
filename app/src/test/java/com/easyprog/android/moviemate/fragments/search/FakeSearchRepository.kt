@@ -1,16 +1,16 @@
 package com.easyprog.android.moviemate.fragments.search
 
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.easyprog.android.moviemate.domain.SearchRepository
 
 class FakeSearchRepository : SearchRepository {
 
-    private var movieList: List<Movie> = emptyList()
+    private var movieList: List<MovieMainInfo> = emptyList()
     private var error = false
     private var messageError: String = ""
 
-    fun setMovieList(newSearchMovieList: List<Movie> = emptyList()) {
+    fun setMovieList(newSearchMovieList: List<MovieMainInfo> = emptyList()) {
         movieList = newSearchMovieList
     }
 
@@ -19,7 +19,7 @@ class FakeSearchRepository : SearchRepository {
         error = true
     }
 
-    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
+    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<MovieMainInfo>> {
         return if (!error) {
             val filterList = if (movieList.isNotEmpty()) movieList.filter { movie ->
                 movie.name.contains(searchQuery)
@@ -31,7 +31,7 @@ class FakeSearchRepository : SearchRepository {
         }
     }
 
-    override suspend fun getRecommendedMovies(): Result<List<Movie>> {
+    override suspend fun getRecommendedMovies(): Result<List<MovieMainInfo>> {
         return if (!error) {
             Result.SUCCESS(movieList)
         } else {

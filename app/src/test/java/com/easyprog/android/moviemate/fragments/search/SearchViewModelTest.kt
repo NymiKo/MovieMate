@@ -3,8 +3,9 @@ package com.easyprog.android.moviemate.fragments.search
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.easyprog.android.moviemate.CoroutineTestRule
 import com.easyprog.android.moviemate.FakeDispatcherList
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.easyprog.android.moviemate.data.Result
+import com.easyprog.android.moviemate.di.search.SearchViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -31,14 +32,14 @@ class SearchViewModelTest {
     @Test
     fun `get a list of movies on demand in the search with a successful result`() = runTest {
         val movieList = listOf(
-            Movie(0, "Милый дом"),
-            Movie(1, "Завтра"),
-            Movie(2, "Во имя мести")
+            MovieMainInfo(0, "Милый дом"),
+            MovieMainInfo(1, "Завтра"),
+            MovieMainInfo(2, "Во имя мести")
         )
         repository.setMovieList(movieList)
         viewModel.getMovieListBySearch("лы")
         val actualList = viewModel.searchMovieList.value
-        val expectedList = Result.SUCCESS(listOf(Movie(0, "Милый дом")))
+        val expectedList = Result.SUCCESS(listOf(MovieMainInfo(0, "Милый дом")))
         Assert.assertEquals(expectedList, actualList)
     }
 
@@ -56,16 +57,16 @@ class SearchViewModelTest {
     fun `get an empty list on request`() = runTest {
         viewModel.getMovieListBySearch("лы")
         val actualList = viewModel.searchMovieList.value
-        val expectedList = Result.SUCCESS(emptyList<Movie>())
+        val expectedList = Result.SUCCESS(emptyList<MovieMainInfo>())
         Assert.assertEquals(expectedList, actualList)
     }
 
     @Test
     fun `get a list of recommended movies with a successful result`() = runTest {
         val movieList = listOf(
-            Movie(0, "Милый дом"),
-            Movie(1, "Завтра"),
-            Movie(2, "Во имя мести")
+            MovieMainInfo(0, "Милый дом"),
+            MovieMainInfo(1, "Завтра"),
+            MovieMainInfo(2, "Во имя мести")
         )
         repository.setMovieList(movieList)
         viewModel.getRecommendedMovies()

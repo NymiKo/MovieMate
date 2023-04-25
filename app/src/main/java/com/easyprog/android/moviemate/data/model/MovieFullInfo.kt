@@ -1,6 +1,6 @@
 package com.easyprog.android.moviemate.data.model
 
-data class Movie(
+data class MovieFullInfo(
     val id: String = "",
     val name: String = "",
     val image: String = "",

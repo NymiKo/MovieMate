@@ -1,16 +1,16 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.Movie
-import com.easyprog.android.moviemate.domain.MovieRepository
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.domain.MovieListRepository
 
-class FakeMovieListRepository : MovieRepository {
+class FakeMovieListListRepository : MovieListRepository {
 
-    private var movieList = emptyList<Movie>()
+    private var movieList = emptyList<MovieMainInfo>()
     private var error = false
     private var massageError: String = ""
 
-    fun setMovieList(newMovieList: List<Movie> = emptyList()) {
+    fun setMovieList(newMovieList: List<MovieMainInfo> = emptyList()) {
         movieList = newMovieList
     }
 
@@ -19,7 +19,7 @@ class FakeMovieListRepository : MovieRepository {
         error = true
     }
 
-    override suspend fun getMovieList(): Result<List<Movie>> {
+    override suspend fun getMovieList(): Result<List<MovieMainInfo>> {
         return if (!error) {
             Result.SUCCESS(movieList)
         } else {

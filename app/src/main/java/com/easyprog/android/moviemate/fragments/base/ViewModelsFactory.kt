@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.easyprog.android.moviemate.di.App
 import com.easyprog.android.moviemate.fragments.movie_list.MovieListViewModel
-import com.easyprog.android.moviemate.fragments.search.SearchViewModel
+import com.easyprog.android.moviemate.di.search.SearchViewModel
 import kotlinx.coroutines.Dispatchers
 
 class ViewModelsFactory(

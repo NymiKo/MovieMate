@@ -1,6 +1,8 @@
 package com.easyprog.android.moviemate.data
 
-import com.easyprog.android.moviemate.data.model.Movie
+import com.easyprog.android.moviemate.data.model.MovieCarousel
+import com.easyprog.android.moviemate.data.model.MovieFullInfo
+import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -21,7 +23,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         private const val NAME_FOR_SEARCH = "name_for_search"
         private const val NAME = "name"
         private const val CATALOG = "catalog"
-        val MOVIE_CLASS = Movie::class.java
+        val MOVIE_CLASS = MovieMainInfo::class.java
     }
 
     private lateinit var firestore: FirebaseFirestore
@@ -33,58 +35,58 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return firestore
     }
 
-    override suspend fun getMovieList(catalog: String): Result<List<Movie>> {
+    override suspend fun getMovieList(catalog: String): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(CATALOG, catalog).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<Movie>> {
+    override suspend fun getMovieListBySearch(searchQuery: String): Result<List<MovieFullInfo>> {
         val snapshot =
             getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(NAME_FOR_SEARCH, searchQuery.lowercase())
                 .get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getRecommendedMovies(): Result<List<Movie>> {
+    override suspend fun getRecommendedMovies(): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_RECOMMENDED_MOVIES).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getMoviesByGenre(genre: String): Result<List<Movie>> {
+    override suspend fun getMoviesByGenre(genre: String): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(genre.lowercase()).orderBy(NAME).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getMovieInfo(idMovie: String): Result<List<Movie>> {
+    override suspend fun getMovieInfo(idMovie: String): Result<List<MovieFullInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(ID, idMovie)
             .get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getCarouselMovieList(): Result<List<Movie>> {
+    override suspend fun getCarouselMovieList(): Result<List<MovieCarousel>> {
         val snapshot = getFirestore().collection(COLLECTION_CAROUSEL).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getNewMovieList(): Result<List<Movie>> {
+    override suspend fun getNewMovieList(): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_NEW_MOVIE).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getWeekendMovieList(): Result<List<Movie>> {
+    override suspend fun getWeekendMovieList(): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_WEEKEND_MOVIE).get().await()
         return getResult(snapshot)
     }
 
-    override suspend fun getFascinatingSeriesList(): Result<List<Movie>> {
+    override suspend fun getFascinatingSeriesList(): Result<List<MovieMainInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_FASCINATING_SERIES).get().await()
         return getResult(snapshot)
     }
 
-    private fun getResult(snapshot: QuerySnapshot): Result<List<Movie>> {
+    private inline fun <reified T: Any> getResult(snapshot: QuerySnapshot): Result<List<T>> {
         return try {
             if (!snapshot.isEmpty) {
-                Result.SUCCESS(snapshot.toObjects(MOVIE_CLASS))
+                Result.SUCCESS(snapshot.toObjects(T::class.java))
             } else {
                 Result.ERROR("error")
             }
