@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyprog.android.moviemate.data.Result
+import com.easyprog.android.moviemate.data.model.MovieFullInfo
 import com.easyprog.android.moviemate.data.model.MovieMainInfo
 import com.easyprog.android.moviemate.domain.MovieListRepository
 import com.easyprog.android.moviemate.fragments.base.DispatchersList
@@ -18,12 +19,12 @@ class SerialsListViewModel @Inject constructor(
     private val dispatcher: DispatchersList
 ): ViewModel() {
 
-    private val _serialsList = MutableLiveData<Result<List<MovieMainInfo>>>()
-    val serialsList: LiveData<Result<List<MovieMainInfo>>> = _serialsList
+    private val _serialsList = MutableLiveData<Result<List<MovieFullInfo>>>()
+    val serialsList: LiveData<Result<List<MovieFullInfo>>> = _serialsList
 
     fun getMovieList(catalog: String) {
         viewModelScope.launch(dispatcher.io()) {
-            if (_serialsList.value == null || _serialsList.value != emptyList<MovieMainInfo>()) {
+            if (_serialsList.value == null || _serialsList.value != emptyList<MovieFullInfo>()) {
                 _serialsList.postValue(Result.LOADING)
                 val movieList = repository.getMovieList(catalog)
                 _serialsList.postValue(movieList)

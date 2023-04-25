@@ -35,7 +35,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         return firestore
     }
 
-    override suspend fun getMovieList(catalog: String): Result<List<MovieMainInfo>> {
+    override suspend fun getMovieList(catalog: String): Result<List<MovieFullInfo>> {
         val snapshot = getFirestore().collection(COLLECTION_MOVIES).whereEqualTo(CATALOG, catalog).get().await()
         return getResult(snapshot)
     }

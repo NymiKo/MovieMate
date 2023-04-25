@@ -6,7 +6,7 @@ import com.easyprog.android.moviemate.data.model.MovieMainInfo
 
 interface FirebaseSource {
 
-    suspend fun getMovieList(catalog: String): Result<List<MovieMainInfo>>
+    suspend fun getMovieList(catalog: String): Result<List<MovieFullInfo>>
     suspend fun getMovieListBySearch(searchQuery: String): Result<List<MovieFullInfo>>
     suspend fun getRecommendedMovies(): Result<List<MovieMainInfo>>
     suspend fun getMoviesByGenre(genre: String): Result<List<MovieMainInfo>>
