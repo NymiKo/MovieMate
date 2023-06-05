@@ -1,5 +1,6 @@
 package com.easyprog.android.moviemate.data
 
+import android.util.Log
 import com.easyprog.android.moviemate.data.models.Filters
 import com.easyprog.android.moviemate.data.models.MovieCarousel
 import com.easyprog.android.moviemate.data.models.MovieFullInfo
@@ -92,6 +93,7 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
         }
         getResult<MovieMainInfo>(idMovie)
         val snapshot = getFirestore().collection(COLLECTION_FASCINATING_SERIES).get().await()
+        Log.e("TEST", "test")
         return getResult(snapshot)
     }
 
