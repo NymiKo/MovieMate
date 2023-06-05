@@ -1,7 +1,7 @@
 package com.easyprog.android.moviemate.fragments.movie_list
 
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.easyprog.android.moviemate.domain.MovieListRepository
 
 class FakeMovieListListRepository : MovieListRepository {

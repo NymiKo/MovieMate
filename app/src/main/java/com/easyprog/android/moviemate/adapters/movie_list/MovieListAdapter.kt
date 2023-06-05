@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.base.BaseAdapter
-import com.easyprog.android.moviemate.data.model.MovieFullInfo
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
 import com.easyprog.android.moviemate.databinding.ItemMovieListBinding
 import com.easyprog.android.moviemate.utils.loadImage
 

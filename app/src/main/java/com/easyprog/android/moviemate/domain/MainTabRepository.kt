@@ -1,8 +1,8 @@
 package com.easyprog.android.moviemate.domain
 
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.MovieCarousel
+import com.easyprog.android.moviemate.data.models.MovieCarousel
 
 interface MainTabRepository {
     suspend fun getCarouselMovieList(): Result<List<MovieCarousel>>

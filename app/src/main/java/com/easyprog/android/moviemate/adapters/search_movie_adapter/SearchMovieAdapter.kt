@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyprog.android.moviemate.R
 import com.easyprog.android.moviemate.adapters.base.BaseActionListener
 import com.easyprog.android.moviemate.adapters.search_movie_adapter.SearchMovieAdapter.SearchMovieViewHolder
-import com.easyprog.android.moviemate.data.model.MovieFullInfo
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
 import com.easyprog.android.moviemate.databinding.ItemSearchMovieBinding
 import com.easyprog.android.moviemate.utils.loadImage
 

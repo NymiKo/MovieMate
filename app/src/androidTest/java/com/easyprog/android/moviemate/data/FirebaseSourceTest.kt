@@ -1,7 +1,7 @@
 package com.easyprog.android.moviemate.data
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
 import org.junit.Before

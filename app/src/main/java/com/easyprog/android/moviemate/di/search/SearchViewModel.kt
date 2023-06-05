@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.easyprog.android.moviemate.domain.SearchRepository
 import com.easyprog.android.moviemate.fragments.base.DispatchersList
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,8 +19,8 @@ class SearchViewModel @Inject constructor(
     private val dispatcher: DispatchersList
 ) : ViewModel() {
 
-    private val _searchMovieList = MutableLiveData<Result<List<MovieMainInfo>>>()
-    val searchMovieList: LiveData<Result<List<MovieMainInfo>>> = _searchMovieList
+    private val _searchMovieList = MutableLiveData<Result<List<MovieFullInfo>>>()
+    val searchMovieList: LiveData<Result<List<MovieFullInfo>>> = _searchMovieList
 
     private val _recommendedMoviesList = MutableLiveData<Result<List<MovieMainInfo>>>()
     val recommendedMoviesList: LiveData<Result<List<MovieMainInfo>>> = _recommendedMoviesList

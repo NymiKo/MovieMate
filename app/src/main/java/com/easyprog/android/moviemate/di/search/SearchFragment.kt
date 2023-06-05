@@ -17,7 +17,8 @@ import com.easyprog.android.moviemate.adapters.search_movie_adapter.SearchMovieA
 import com.easyprog.android.moviemate.adapters.categories.CategoriesActionListener
 import com.easyprog.android.moviemate.adapters.movies_by_category.MoviesByCategoryAdapter
 import com.easyprog.android.moviemate.data.Result
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.easyprog.android.moviemate.databinding.FragmentSearchBinding
 import com.easyprog.android.moviemate.fragments.base.BaseFragment
 import com.easyprog.android.moviemate.utils.*
@@ -157,7 +158,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
     }
 
-    private fun setResultToFoundMovieRecyclerView(movieList: List<MovieMainInfo>) {
+    private fun setResultToFoundMovieRecyclerView(movieList: List<MovieFullInfo>) {
         mAdapterSearchMovie.movieList = movieList
     }
 
@@ -177,7 +178,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
     }
 
-    private fun checkResultSuccess(data: List<MovieMainInfo>) {
+    private fun checkResultSuccess(data: List<MovieFullInfo>) {
         if (data.isNotEmpty()) {
             binding.recyclerViewFoundMovies.visibility = View.VISIBLE
             setResultToFoundMovieRecyclerView(data)

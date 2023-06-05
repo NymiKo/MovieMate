@@ -1,8 +1,9 @@
 package com.easyprog.android.moviemate.data
 
-import com.easyprog.android.moviemate.data.model.MovieCarousel
-import com.easyprog.android.moviemate.data.model.MovieFullInfo
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.Filters
+import com.easyprog.android.moviemate.data.models.MovieCarousel
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
@@ -79,6 +80,17 @@ class FirebaseSourceImpl @Inject constructor() : FirebaseSource {
     }
 
     override suspend fun getFascinatingSeriesList(): Result<List<MovieMainInfo>> {
+        val snapshot = getFirestore().collection(COLLECTION_FASCINATING_SERIES).get().await()
+        return getResult(snapshot)
+    }
+
+    override suspend fun getMoviesByFilters(filters: Filters): Result<List<MovieMainInfo>> {
+        val idMovie = if (filters.genre.isNotEmpty()) {
+            getFirestore().collection(filters.genre).get().await()
+        } else {
+            getFirestore().collection(COLLECTION_MOVIES).get().await()
+        }
+        getResult<MovieMainInfo>(idMovie)
         val snapshot = getFirestore().collection(COLLECTION_FASCINATING_SERIES).get().await()
         return getResult(snapshot)
     }

@@ -1,4 +1,4 @@
-package com.easyprog.android.moviemate.data.model
+package com.easyprog.android.moviemate.data.models
 
 data class MovieMainInfo(
     val id: String = "",

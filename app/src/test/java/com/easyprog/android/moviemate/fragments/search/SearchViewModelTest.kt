@@ -3,7 +3,7 @@ package com.easyprog.android.moviemate.fragments.search
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.easyprog.android.moviemate.CoroutineTestRule
 import com.easyprog.android.moviemate.FakeDispatcherList
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 import com.easyprog.android.moviemate.data.Result
 import com.easyprog.android.moviemate.di.search.SearchViewModel
 import kotlinx.coroutines.test.runTest

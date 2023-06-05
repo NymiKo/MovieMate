@@ -1,8 +1,9 @@
 package com.easyprog.android.moviemate.data
 
-import com.easyprog.android.moviemate.data.model.MovieCarousel
-import com.easyprog.android.moviemate.data.model.MovieFullInfo
-import com.easyprog.android.moviemate.data.model.MovieMainInfo
+import com.easyprog.android.moviemate.data.models.Filters
+import com.easyprog.android.moviemate.data.models.MovieCarousel
+import com.easyprog.android.moviemate.data.models.MovieFullInfo
+import com.easyprog.android.moviemate.data.models.MovieMainInfo
 
 interface FirebaseSource {
 
@@ -15,5 +16,6 @@ interface FirebaseSource {
     suspend fun getNewMovieList(): Result<List<MovieMainInfo>>
     suspend fun getWeekendMovieList(): Result<List<MovieMainInfo>>
     suspend fun getFascinatingSeriesList(): Result<List<MovieMainInfo>>
+    suspend fun getMoviesByFilters(filters: Filters): Result<List<MovieMainInfo>>
 
 }
